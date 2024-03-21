@@ -1,0 +1,210 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/ChannelLimit.schema.json",
+    "type": "object",
+    "title": "Channel Limit",
+    "description": "A 95% C.L. limit on the rate of a Higgs::predictions::ChannelProcess that only depends on the mass of the particle.\n The examples show:\n\n 1. a straightforward implementation of a limit on a simple process\n 2. an implementation of a normalized combination of many channels with model assumptions that showcases some of the optional features.\n\n In both of the examples all mass points except for the first and the last one were removed for brevity.",
+    "required": [
+        "limitClass",
+        "id",
+        "reference",
+        "source",
+        "citeKey",
+        "collider",
+        "experiment",
+        "luminosity",
+        "process",
+        "analysis"
+    ],
+    "properties": {
+        "limitClass": {
+            "const": "ChannelLimit"
+        },
+        "id": {
+            "$ref": "CommonDefs.schema.json#/id"
+        },
+        "reference": {
+            "$ref": "CommonDefs.schema.json#/reference"
+        },
+        "source": {
+            "$ref": "CommonDefs.schema.json#/source"
+        },
+        "citeKey": {
+            "$ref": "CommonDefs.schema.json#/citeKey"
+        },
+        "collider": {
+            "$ref": "CommonDefs.schema.json#/collider"
+        },
+        "experiment": {
+            "$ref": "CommonDefs.schema.json#/experiment"
+        },
+        "luminosity": {
+            "$ref": "CommonDefs.schema.json#/luminosity"
+        },
+        "process": {
+            "$ref": "ChannelProcess.schema.json"
+        },
+        "constraints": {
+            "$ref": "Constraints.schema.json#/constraintsWSignal"
+        },
+        "normalization": {
+            "$ref": "Constraints.schema.json#/normalizationWSignal"
+        },
+        "analysis": {
+            "type": "object",
+            "description": "The actual data of the limit and properties of the experimental analysis.",
+            "required": [
+                "grid",
+                "limit"
+            ],
+            "properties": {
+                "massResolution": {
+                    "$ref": "CommonDefs.schema.json#/massResolution"
+                },
+                "acceptances": {
+                    "$ref": "Acceptances.schema.json"
+                },
+                "grid": {
+                    "type": "object",
+                    "description": "Defines the grid on which the limits are given",
+                    "properties": {
+                        "mass": {
+                            "$ref": "CommonDefs.schema.json#/massGrid"
+                        }
+                    },
+                    "required": [
+                        "mass"
+                    ],
+                    "additionalProperties": false
+                },
+                "limit": {
+                    "type": "object",
+                    "description": "The actual data of the 95% C.L. limit **in `pb`** (unless the limit is normalized, see `/normalization`). The length of the `observed` and `expected` arrays must match the length of the mass grid.",
+                    "properties": {
+                        "observed": {
+                            "$ref": "CommonDefs.schema.json#/observedLimit"
+                        },
+                        "expected": {
+                            "$ref": "CommonDefs.schema.json#/expectedLimit"
+                        }
+                    },
+                    "required": [
+                        "observed",
+                        "expected"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "examples": [
+        {
+            "limitClass": "ChannelLimit",
+            "id": 190702749,
+            "reference": "1907.02749",
+            "source": "Aux Tab 2",
+            "citeKey": "Aad:2019zwb",
+            "collider": "LHC13",
+            "experiment": "ATLAS",
+            "luminosity": 27.8,
+            "process": {
+                "channels": [
+                    [
+                        "bbH",
+                        "bb"
+                    ]
+                ]
+            },
+            "analysis": {
+                "massResolution": {
+                    "absolute": 15,
+                    "relative": 0.15
+                },
+                "grid": {
+                    "mass": [
+                        450.0,
+                        1400.0
+                    ]
+                },
+                "limit": {
+                    "observed": [
+                        3.46,
+                        0.98
+                    ],
+                    "expected": [
+                        3.3,
+                        0.52
+                    ]
+                }
+            }
+        },
+        {
+            "limitClass": "ChannelLimit",
+            "id": 181108459,
+            "reference": "1811.08459",
+            "source": "https://doi.org/10.17182/hepdata.91266.v1/t7",
+            "citeKey": "Sirunyan:2018aui",
+            "collider": "LHC13",
+            "experiment": "CMS",
+            "luminosity": 55.6,
+            "process": {
+                "channels": [
+                    [
+                        "H",
+                        "gamgam"
+                    ],
+                    [
+                        "vbfH",
+                        "gamgam"
+                    ],
+                    [
+                        "HZ",
+                        "gamgam"
+                    ],
+                    [
+                        "HW",
+                        "gamgam"
+                    ],
+                    [
+                        "Htt",
+                        "gamgam"
+                    ]
+                ]
+            },
+            "constraints": [
+                {
+                    "modelLike": "SMHiggs",
+                    "process": "signal"
+                }
+            ],
+            "normalization": {
+                "reference": "SMHiggs",
+                "process": "signal"
+            },
+            "analysis": {
+                "massResolution": {
+                    "absolute": 1.5,
+                    "relative": 0.0
+                },
+                "grid": {
+                    "mass": [
+                        80.0,
+                        110.0
+                    ]
+                },
+                "limit": {
+                    "observed": [
+                        0.69669,
+                        0.21681
+                    ],
+                    "expected": [
+                        0.54883,
+                        0.25879
+                    ]
+                }
+            }
+        }
+    ],
+    "additionalProperties": false
+}

@@ -1,0 +1,82 @@
+[
+    {
+        "symbol": [
+            "std::filesystem",
+            "private",
+            "<filesystem>",
+            "public"
+        ]
+    },
+    {
+        "symbol": [
+            "std::abs",
+            "private",
+            "<cmath>",
+            "public"
+        ]
+    },
+    {
+        "symbol": [
+            "std::exception",
+            "private",
+            "<exception>",
+            "public"
+        ]
+    },
+    {
+        "symbol": [
+            "nlohmann::detail::iteration_proxy",
+            "private",
+            "\"utilities/Json.hpp\"",
+            "public"
+        ]
+    },
+    {
+        "symbol": [
+            "nlohmann::detail::iteration_proxy_value",
+            "private",
+            "\"utilities/Json.hpp\"",
+            "public"
+        ]
+    },
+    {
+        "include": [
+            "@[<\"]Eigen/src/Core/.*[>\"]",
+            "private",
+            "<Eigen/Core>",
+            "public"
+        ]
+    },
+    {
+        "include": [
+            "\"src/Core/ArrayBase.h\"",
+            "private",
+            "<Eigen/Core>",
+            "public"
+        ]
+    },
+    {
+        "include": [
+            "\"src/Core/DenseBase.h\"",
+            "private",
+            "<Eigen/Core>",
+            "public"
+        ]
+    },
+    {
+        "include": [
+            "@[<\"]Eigen/src/Dense/.*[>\"]",
+            "private",
+            "<Eigen/Dense>",
+            "public"
+        ]
+    },
+    {
+        "include": [
+            "@[<\"]Eigen/src/Cholesky/.*[>\"]",
+            "private",
+            "<Eigen/Cholesky>",
+            "public"
+        ]
+    }
+]

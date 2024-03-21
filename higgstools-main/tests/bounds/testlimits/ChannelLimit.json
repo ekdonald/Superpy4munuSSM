@@ -1,0 +1,43 @@
+{
+    "limitClass": "ChannelLimit",
+    "id": 19072749,
+    "reference": "2010.12345",
+    "citeKey": "Wittbrodt:20ab",
+    "collider": "LHC8",
+    "experiment": "ATLAS",
+    "luminosity": 39.1,
+    "process": {
+        "charge": "neutral",
+        "channels": [
+            [
+                "H",
+                "gamgam"
+            ]
+        ]
+    },
+    "analysis": {
+        "massResolution": {
+            "relative": 0.2,
+            "absolute": 2
+        },
+        "grid": {
+            "mass": [
+                10,
+                200,
+                1000
+            ]
+        },
+        "limit": {
+            "observed": [
+                1,
+                3,
+                5
+            ],
+            "expected": [
+                2,
+                4,
+                6
+            ]
+        }
+    }
+}

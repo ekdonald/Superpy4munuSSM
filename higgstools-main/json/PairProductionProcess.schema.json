@@ -1,0 +1,42 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/PairProductionProcess.schema.json",
+    "title": "ChainDecayProcess",
+    "type": "object",
+    "description": "A process involving non-resonant pair production of two (potentially different) BSM particles. Corresponds to a Higgs::predictions::PairProductionProcess. The process is defined by lists of decay modes `d1` and `d2` for the two produced particles. The rate is obtained as the sum over all possible combinations of `d1`, and `d2`.\n The example shows the process `pp/ee -> h1 h2, h1 -> bb, h2 -> tautau`.",
+    "required": [
+        "firstDecay",
+        "secondDecay"
+    ],
+    "examples": [
+        {
+            "firstDecay": [
+                "bb"
+            ],
+            "secondDecay": [
+                "tautau"
+            ]
+        }
+    ],
+    "properties": {
+        "firstDecay": {
+            "type": "array",
+            "description": "A list of decay modes for the first particle.",
+            "items": {
+                "$ref": "CommonDefs.schema.json#/decayMode"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+        },
+        "secondDecay": {
+            "type": "array",
+            "description": "A list of decay modes for the first particle.",
+            "items": {
+                "$ref": "CommonDefs.schema.json#/decayMode"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+        }
+    },
+    "additionalProperties": false
+}

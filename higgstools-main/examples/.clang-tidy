@@ -1,0 +1,6 @@
+---
+Checks: "-*-magic-numbers,-*-using-namespace"
+WarningsAsErrors: ""
+HeaderFilterRegex: ""
+AnalyzeTemporaryDtors: false
+FormatStyle: none

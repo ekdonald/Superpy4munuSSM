@@ -1,0 +1,67 @@
+{
+    "limitClass": "PairProductionLimit",
+    "citeKey": "Aad:1234",
+    "collider": "LHC13",
+    "reference": "2020.22222",
+    "experiment": "ATLAS",
+    "id": 123123123,
+    "luminosity": 30.0,
+    "analysis": {
+        "grid": {
+            "massFirstParticle": [
+                50,
+                100,
+                150
+            ],
+            "massSecondParticle": [
+                60,
+                120,
+                125
+            ]
+        },
+        "limit": {
+            "expected": [
+                10.0,
+                20.0,
+                30.0,
+                11.0,
+                21.0,
+                31.0,
+                12.0,
+                22.0,
+                32.0
+            ],
+            "observed": [
+                10.0,
+                20.0,
+                30.0,
+                11.0,
+                21.0,
+                31.0,
+                12.0,
+                22.0,
+                32.0
+            ]
+        },
+        "massResolution": {
+            "firstParticle": {
+                "absolute": 10,
+                "relative": 0.1
+            },
+            "secondParticle": {
+                "absolute": 10,
+                "relative": 0.1
+            }
+        }
+    },
+    "process": {
+        "firstDecay": [
+            "gamgam",
+            "mumu"
+        ],
+        "secondDecay": [
+            "bb",
+            "mumu"
+        ]
+    }
+}

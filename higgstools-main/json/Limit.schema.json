@@ -1,0 +1,32 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/Limit.schema.json",
+    "title": "Limit",
+    "description": "A json representation of a Higgs::bounds::Limit. All different possible limit types are shown here. They are distinguished by different values of the `/limitClass` property. The different values of this property are also the titles of the cases below. Every limit file for HiggsBounds has to validate against this schema.",
+    "oneOf": [
+        {
+            "title": "ChannelLimit",
+            "$ref": "ChannelLimit.schema.json"
+        },
+        {
+            "title": "ChannelWidthLimit",
+            "$ref": "ChannelWidthLimit.schema.json"
+        },
+        {
+            "title": "ChainDecayLimit",
+            "$ref": "ChainDecayLimit.schema.json"
+        },
+        {
+            "title": "PairDecayLimit",
+            "$ref": "PairDecayLimit.schema.json"
+        },
+        {
+            "title": "PairProductionLimit",
+            "$ref": "PairProductionLimit.schema.json"
+        },
+        {
+            "title": "LikelihoodLimit",
+            "$ref": "LikelihoodLimit.schema.json"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+/**
+
+@namespace Higgs
+@brief Top level namespace of the Higgs libraries.
+
+@namespace Higgs::predictions
+@brief HiggsPredictions namespace
+
+@namespace Higgs::bounds
+@brief HiggsBounds namespace
+
+@namespace Higgs::signals
+@brief HiggsSignals namespace
+
+*/

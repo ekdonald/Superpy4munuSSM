@@ -1,0 +1,188 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6541,        180]
+NotebookOptionsPosition[      5066,        146]
+NotebookOutlinePosition[      5460,        162]
+CellTagsIndexPosition[      5417,        159]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Load and initalize HiggsTools", "Subsubsection",
+ CellChangeTimes->{{3.868035110845262*^9, 
+  3.868035115238552*^9}},ExpressionUUID->"eab71748-8702-460d-89e9-\
+1664c7526feb"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Install", "[", "\"\</Path/To/HiggsTools/build/wstp/MHiggsTools\>\"", "]"}],
+   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"HBInitialize", "[", "\"\</Path/To/HBDataSet\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"HSInitialize", "[", "\"\</Path/To/HSDataSet\>\"", "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8354121828403797`*^9, 3.8354122084266987`*^9}, {
+   3.83541240904497*^9, 3.83541243111749*^9}, {3.859408326201899*^9, 
+   3.859408326901308*^9}, {3.859978168355002*^9, 3.859978169491312*^9}, 
+   3.868034755399987*^9, {3.8680351025687513`*^9, 3.868035119558666*^9}, {
+   3.86803532289167*^9, 
+   3.8680353448859377`*^9}},ExpressionUUID->"d2720fc5-16fc-4a58-86fc-\
+9696c3e4449f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["HiggsPredictions input", "Subsubsection",
+ CellChangeTimes->{{3.868035130960721*^9, 
+  3.868035136016011*^9}},ExpressionUUID->"e2c826f0-6908-4c67-a806-\
+11ad375ca929"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"add", " ", "SM"}], "-", 
+    RowBox[{"like", " ", "particle"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"HPAddParticle", "[", 
+    RowBox[{
+    "\"\<h\>\"", ",", "125.09", ",", "\"\<neutral\>\"", ",", "\"\<even\>\""}],
+     "]"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"give", " ", "particle", " ", "SM"}], "-", 
+     RowBox[{"like", " ", "couplings"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"HPSMLikeEffCouplings", "[", "\"\<h\>\"", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.859409102763682*^9, 3.859409105599908*^9}, {
+  3.8680347903395357`*^9, 3.868034809532311*^9}, {3.8680351397814293`*^9, 
+  3.868035161485714*^9}},
+ CellLabel->"In[4]:=",ExpressionUUID->"cb9e9c21-f5a3-40ec-bb84-b4fd54315ba8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Run HiggsBounds", "Subsubsection",
+ CellChangeTimes->{{3.868035166522073*^9, 
+  3.868035170503035*^9}},ExpressionUUID->"a6b7b775-8ec3-41bf-8e1b-\
+591f91199cfc"],
+
+Cell[BoxData[{
+ RowBox[{"HBApplyBounds", "[", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"HBGetSelectedBounds", "[", "]"}]}], "Input",
+ CellChangeTimes->{{3.868034881696896*^9, 3.8680348905540524`*^9}, {
+  3.868035039841181*^9, 3.868035048055875*^9}},
+ CellLabel->"In[6]:=",ExpressionUUID->"8f73b3ff-689d-4d48-b325-55098f7b2004"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Run HiggsSignals", "Subsubsection",
+ CellChangeTimes->{{3.868035166522073*^9, 
+  3.868035188113241*^9}},ExpressionUUID->"44c817f5-e87d-4d82-ada8-\
+278757d6abbf"],
+
+Cell[BoxData[
+ RowBox[{"chisqSM", " ", "=", " ", 
+  RowBox[{"HSGetChisq", "[", "]"}]}]], "Input",
+ CellChangeTimes->{{3.8680349039307127`*^9, 3.8680349053295183`*^9}, {
+  3.868035179936306*^9, 3.868035180568677*^9}},
+ CellLabel->"In[8]:=",ExpressionUUID->"a994b491-3ed6-4af9-87d3-334afdea858b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Add a small BSM lepton-flavor violating decay", "Subsubsection",
+ CellChangeTimes->{{3.8680351988555098`*^9, 
+  3.868035205012978*^9}},ExpressionUUID->"de4cac3d-c32a-4875-aed1-\
+b5c2693cc77b"],
+
+Cell["\<\
+There are very strong limits on this kind of process in HiggsBounds.\
+\>", "Text",
+ CellChangeTimes->{
+  3.868035212221013*^9},ExpressionUUID->"b63c94f5-01a0-42c6-b27e-\
+a5eed7699447"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"set", " ", "h"}], "->", 
+    RowBox[{"emu", " ", "decay", " ", "width"}]}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"HPSetDecayWidth", "[", 
+    RowBox[{"\"\<h\>\"", ",", "\"\<emu\>\"", ",", 
+     SuperscriptBox["10", 
+      RowBox[{"-", "6"}]]}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"run", " ", "HiggsBounds"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"HBApplyBounds", "[", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"HBGetSelectedBounds", "[", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"run", " ", "HiggsSignals"}], " ", "*)"}], "\[IndentingNewLine]", 
+   
+   RowBox[{"HSGetChisq", "[", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.868035057717197*^9, 3.868035070078039*^9}, {
+  3.868035222607831*^9, 3.868035245459497*^9}, {3.8680352814054327`*^9, 
+  3.868035283744398*^9}},
+ CellLabel->"In[13]:=",ExpressionUUID->"e23a50c8-61e1-4ce2-916f-638d48973702"]
+}, Open  ]]
+},
+WindowSize->{720, 847},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.0 for Mac OS X ARM (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"ea75088c-1a16-4e8a-8504-e04026b93d1b"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 180, 3, 45, "Subsubsection",ExpressionUUID->"eab71748-8702-460d-89e9-1664c7526feb"],
+Cell[763, 27, 759, 17, 73, "Input",ExpressionUUID->"d2720fc5-16fc-4a58-86fc-9696c3e4449f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1559, 49, 173, 3, 45, "Subsubsection",ExpressionUUID->"e2c826f0-6908-4c67-a806-11ad375ca929"],
+Cell[1735, 54, 839, 19, 94, "Input",ExpressionUUID->"cb9e9c21-f5a3-40ec-bb84-b4fd54315ba8"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2611, 78, 166, 3, 45, "Subsubsection",ExpressionUUID->"a6b7b775-8ec3-41bf-8e1b-591f91199cfc"],
+Cell[2780, 83, 326, 5, 52, "Input",ExpressionUUID->"8f73b3ff-689d-4d48-b325-55098f7b2004"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3143, 93, 167, 3, 45, "Subsubsection",ExpressionUUID->"44c817f5-e87d-4d82-ada8-278757d6abbf"],
+Cell[3313, 98, 294, 5, 30, "Input",ExpressionUUID->"a994b491-3ed6-4af9-87d3-334afdea858b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3644, 108, 198, 3, 45, "Subsubsection",ExpressionUUID->"de4cac3d-c32a-4875-aed1-b5c2693cc77b"],
+Cell[3845, 113, 194, 5, 35, "Text",ExpressionUUID->"b63c94f5-01a0-42c6-b27e-a5eed7699447"],
+Cell[4042, 120, 1008, 23, 159, "Input",ExpressionUUID->"e23a50c8-61e1-4ce2-916f-638d48973702"]
+}, Open  ]]
+}
+]
+*)
+

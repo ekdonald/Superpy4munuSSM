@@ -1,0 +1,86 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/ChannelProcess.schema.json",
+    "title": "ChannelProcess",
+    "type": "object",
+    "description": "A process described as a sum of channels or through a single predefined coupling. Corresponds to a Higgs::predictions::ChannelProcess. Each channel is composed of a production and a decay mode. \nThe first example shows what could be a fully inclusive SM-like Higgs search in the di-photon channel.\nThe second example shows a process interpreted in terms of a SM-normalized Higgs-top-Yukawa coupling, e.g. the CMS gg>H>tt search.",
+    "required": [
+        "channels"
+    ],
+    "examples": [
+        {
+            "channels": [
+                [
+                    "H",
+                    "gamgam"
+                ],
+                [
+                    "vbfH",
+                    "gamgam"
+                ],
+                [
+                    "HZ",
+                    "gamgam"
+                ],
+                [
+                    "HW",
+                    "gamgam"
+                ],
+                [
+                    "Htt",
+                    "gamgam"
+                ]
+            ]
+        },
+        {
+            "coupling": "effCPeTopYuk"
+        }
+    ],
+    "properties": {
+        "channels": {
+            "type": "array",
+            "description": "A list of channels. The rate of the process is the sum of the rates of all channels.",
+            "items": {
+                "$ref": "#/$defs/channel"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+        },
+        "coupling": {
+            "type": "string",
+            "description": "A single predefined Higgs::predictions::Coupling."
+        }
+    },
+    "$defs": {
+        "channel": {
+            "type": "array",
+            "title": "Channel",
+            "description": "A single channel `p -> X -> d` composed of a production mode `p` and a decay mode `d` as `[\"p\", \"d\"]`. If either of `p` or `d` is `\"none\"` it is ignored and the rate is purely determined by the other one.\n Therefore, the examples describe:\n\n 1. the process `b b -> H -> b b`\n 2. the single Higgs production cross section `p p -> H`\n 3. the branching ratio of a particle into a photon pair.",
+            "examples": [
+                [
+                    "bbH",
+                    "bb"
+                ],
+                [
+                    "H",
+                    "none"
+                ],
+                [
+                    "none",
+                    "gamgam"
+                ]
+            ],
+            "items": [
+                {
+                    "$ref": "CommonDefs.schema.json#/productionMode"
+                },
+                {
+                    "$ref": "CommonDefs.schema.json#/decayMode"
+                }
+            ],
+            "minItems": 2,
+            "maxItems": 2
+        }
+    },
+    "additionalProperties": false
+}

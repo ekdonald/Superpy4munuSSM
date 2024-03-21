@@ -1,0 +1,57 @@
+{
+    "limitClass": "LikelihoodLimit",
+    "id": 1412864,
+    "reference": "2012.11111",
+    "citeKey": "Wittbrodt:20ab",
+    "collider": "LHC13",
+    "experiment": "ATLAS",
+    "luminosity": 39.1,
+    "process": [
+        {
+            "charge": "neutral",
+            "channels": [
+                [
+                    "H",
+                    "gamgam"
+                ]
+            ]
+        }
+    ],
+    "analysis": {
+        "massResolution": {
+            "relative": 0.2,
+            "absolute": 2
+        },
+        "grid": {
+            "mass": [
+                10,
+                200,
+                1000
+            ],
+            "channels": [
+                [
+                    0,
+                    10
+                ]
+            ]
+        },
+        "likelihood": {
+            "observed": [
+                0,
+                10,
+                0,
+                30,
+                0,
+                50
+            ],
+            "expected": [
+                0,
+                20,
+                0,
+                40,
+                0,
+                60
+            ]
+        }
+    }
+}

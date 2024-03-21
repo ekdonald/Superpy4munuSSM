@@ -1,0 +1,405 @@
+{
+    "id": 200403447,
+    "reference": "2004.03447",
+    "source": "https://doi.org/10.17182/hepdata.94311.v1/t25, https://doi.org/10.17182/hepdata.94311.v1/t27, http://dgillber.web.cern.ch/dgillber/ggF_uncertainty_2017/corr2017.pdf",
+    "citeKey": "ATLAS:2020rej",
+    "collider": "LHC13",
+    "experiment": "ATLAS",
+    "luminosity": 139.0,
+    "referenceMass": 125,
+    "referenceModel": "SMHiggs",
+    "massResolution": 2.5,
+    "subMeasurements": {
+        "gg2H_0j_pTH_Low": {
+            "ref": [
+                0.151,
+                0.176,
+                0.201
+            ],
+            "obs": [
+                0.115,
+                0.17,
+                0.225
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "H",
+                        "ZZ"
+                    ]
+                ]
+            }
+        },
+        "gg2H_0j_pTH_High": {
+            "ref": [
+                0.51,
+                0.55,
+                0.59
+            ],
+            "obs": [
+                0.52,
+                0.63,
+                0.74
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "H",
+                        "ZZ"
+                    ]
+                ]
+            }
+        },
+        "gg2H_1j_pTH_Low": {
+            "ref": [
+                0.147,
+                0.172,
+                0.197
+            ],
+            "obs": [
+                -0.03,
+                0.05,
+                0.13
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "H",
+                        "ZZ"
+                    ]
+                ]
+            }
+        },
+        "gg2H_1j_pTH_Med": {
+            "ref": [
+                0.101,
+                0.119,
+                0.137
+            ],
+            "obs": [
+                0.12,
+                0.17,
+                0.22
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "H",
+                        "ZZ"
+                    ]
+                ]
+            }
+        },
+        "gg2H_1j_pTH_High": {
+            "ref": [
+                0.016,
+                0.02,
+                0.024
+            ],
+            "obs": [
+                -0.003,
+                0.009,
+                0.025
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "H",
+                        "ZZ"
+                    ]
+                ]
+            }
+        },
+        "gg2H_2j": {
+            "ref": [
+                0.1,
+                0.127,
+                0.154
+            ],
+            "obs": [
+                -0.035,
+                0.04,
+                0.115
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "H",
+                        "ZZ"
+                    ]
+                ]
+            }
+        },
+        "gg2H_pTH_High": {
+            "ref": [
+                0.011,
+                0.015,
+                0.019
+            ],
+            "obs": [
+                0.022,
+                0.038,
+                0.059
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "H",
+                        "ZZ"
+                    ]
+                ]
+            }
+        },
+        "qq2Hqq_VH": {
+            "ref": [
+                0.0132,
+                0.0138,
+                0.0142
+            ],
+            "obs": [
+                -0.014,
+                0.021,
+                0.056
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "HZ",
+                        "ZZ"
+                    ],
+                    [
+                        "HW",
+                        "WW"
+                    ]
+                ]
+            },
+            "channelWeights": [
+                0.69911,
+                0.6741
+            ]
+        },
+        "qq2Hqq_VBF": {
+            "ref": [
+                0.1041,
+                0.1076,
+                0.11
+            ],
+            "obs": [
+                0.098,
+                0.15,
+                0.214
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "vbfH",
+                        "ZZ"
+                    ]
+                ]
+            }
+        },
+        "qq2Hqq_BSM": {
+            "ref": [
+                0.00402,
+                0.0042,
+                0.00438
+            ],
+            "obs": [
+                -0.0043,
+                0.0005,
+                0.0084
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "vbfH",
+                        "ZZ"
+                    ]
+                ]
+            }
+        },
+        "VH_Lep": {
+            "ref": [
+                0.016,
+                0.0164,
+                0.0168
+            ],
+            "obs": [
+                0.004,
+                0.022,
+                0.05
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "HZ",
+                        "ZZ"
+                    ],
+                    [
+                        "HW",
+                        "WW"
+                    ]
+                ]
+            },
+            "channelWeights": [
+                0.067316,
+                0.2172
+            ]
+        },
+        "ttH": {
+            "ref": [
+                0.0141,
+                0.0154,
+                0.0164
+            ],
+            "obs": [
+                0.008,
+                0.025,
+                0.051
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "Htt",
+                        "ZZ"
+                    ],
+                    [
+                        "Ht",
+                        "ZZ"
+                    ],
+                    [
+                        "HtW",
+                        "ZZ"
+                    ]
+                ]
+            }
+        }
+    },
+    "correlations": {
+        "experimental": {
+            "gg2H_0j_pTH_Low": {
+                "gg2H_0j_pTH_High": -0.055,
+                "gg2H_1j_pTH_Low": -0.029,
+                "gg2H_1j_pTH_Med": 0.015,
+                "gg2H_1j_pTH_High": 0.0039,
+                "gg2H_2j": -0.012,
+                "gg2H_pTH_High": 0.00074,
+                "qq2Hqq_VH": 0.011,
+                "qq2Hqq_VBF": 0.0048,
+                "qq2Hqq_BSM": -1.9e-05,
+                "VH_Lep": 0.0092,
+                "ttH": 0.0047
+            },
+            "gg2H_0j_pTH_High": {
+                "gg2H_1j_pTH_Low": -0.52,
+                "gg2H_1j_pTH_Med": 0.13,
+                "gg2H_1j_pTH_High": 0.075,
+                "gg2H_2j": -0.15,
+                "gg2H_pTH_High": 0.041,
+                "qq2Hqq_VH": 0.049,
+                "qq2Hqq_VBF": -0.0066,
+                "qq2Hqq_BSM": -0.021,
+                "VH_Lep": -0.033,
+                "ttH": 0.0023
+            },
+            "gg2H_1j_pTH_Low": {
+                "gg2H_1j_pTH_Med": -0.1,
+                "gg2H_1j_pTH_High": -0.021,
+                "gg2H_2j": 0.094,
+                "gg2H_pTH_High": -0.013,
+                "qq2Hqq_VH": -0.05,
+                "qq2Hqq_VBF": -0.13,
+                "qq2Hqq_BSM": 0.026,
+                "VH_Lep": -0.011,
+                "ttH": 0.023
+            },
+            "gg2H_1j_pTH_Med": {
+                "gg2H_1j_pTH_High": 0.09,
+                "gg2H_2j": -0.26,
+                "gg2H_pTH_High": 0.046,
+                "qq2Hqq_VH": 0.069,
+                "qq2Hqq_VBF": -0.18,
+                "qq2Hqq_BSM": -0.015,
+                "VH_Lep": -0.042,
+                "ttH": 0.019
+            },
+            "gg2H_1j_pTH_High": {
+                "gg2H_2j": -0.12,
+                "gg2H_pTH_High": 0.01,
+                "qq2Hqq_VH": 0.017,
+                "qq2Hqq_VBF": -0.2,
+                "qq2Hqq_BSM": 0.0024,
+                "VH_Lep": -0.082,
+                "ttH": 0.017
+            },
+            "gg2H_2j": {
+                "gg2H_pTH_High": -0.032,
+                "qq2Hqq_VH": -0.45,
+                "qq2Hqq_VBF": -0.28,
+                "qq2Hqq_BSM": 0.041,
+                "VH_Lep": -0.0071,
+                "ttH": -0.043
+            },
+            "gg2H_pTH_High": {
+                "qq2Hqq_VH": -0.13,
+                "qq2Hqq_VBF": -0.057,
+                "qq2Hqq_BSM": -0.42,
+                "VH_Lep": -0.037,
+                "ttH": -0.096
+            },
+            "qq2Hqq_VH": {
+                "qq2Hqq_VBF": 0.063,
+                "qq2Hqq_BSM": 0.032,
+                "VH_Lep": -0.028,
+                "ttH": -0.11
+            },
+            "qq2Hqq_VBF": {
+                "qq2Hqq_BSM": -0.023,
+                "VH_Lep": -0.0011,
+                "ttH": 0.008
+            },
+            "qq2Hqq_BSM": {
+                "VH_Lep": 0.01,
+                "ttH": 0.029
+            },
+            "VH_Lep": {
+                "ttH": -0.076
+            }
+        },
+        "theoretical": {
+            "gg2H_0j_pTH_Low": {
+                "gg2H_0j_pTH_High": 1.0,
+                "gg2H_1j_pTH_Low": -0.16,
+                "gg2H_1j_pTH_Med": -0.16,
+                "gg2H_1j_pTH_High": -0.12,
+                "gg2H_2j": 0.13,
+                "gg2H_pTH_High": 0.06
+            },
+            "gg2H_0j_pTH_High": {
+                "gg2H_1j_pTH_Low": -0.16,
+                "gg2H_1j_pTH_Med": -0.16,
+                "gg2H_1j_pTH_High": -0.12,
+                "gg2H_2j": 0.13,
+                "gg2H_pTH_High": 0.06
+            },
+            "gg2H_1j_pTH_Low": {
+                "gg2H_1j_pTH_Med": 0.74,
+                "gg2H_1j_pTH_High": 0.36,
+                "gg2H_2j": -0.03,
+                "gg2H_pTH_High": -0.09
+            },
+            "gg2H_1j_pTH_Med": {
+                "gg2H_1j_pTH_High": 0.77,
+                "gg2H_2j": -0.01,
+                "gg2H_pTH_High": 0.21
+            },
+            "gg2H_1j_pTH_High": {
+                "gg2H_2j": 0.08,
+                "gg2H_pTH_High": 0.57
+            },
+            "gg2H_2j": {
+                "gg2H_pTH_High": 0.71
+            }
+        }
+    }
+}

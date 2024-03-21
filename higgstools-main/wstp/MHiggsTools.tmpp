@@ -1,0 +1,786 @@
+:Evaluate:	BeginPackage["HiggsTools`"]
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:Evaluate:  Print["------------------------------------------------------------------------------"]
+:Evaluate:  Print["HiggsTools 1.0"]
+:Evaluate:  Print["H. Bahl, P. Bechtle, T. Biekoetter, S. Heinmeyer, S. Paasch,"]
+:Evaluate:  Print["C. Li, G. Weiglein, J. Wittbrodt                            "]
+:Evaluate:  Print["------------------------------------------------------------------------------"]
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: function documentation
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:Evaluate:  HPSetBrTopWb::usage =
+  "HPSetBrTopWb[value_Real] set the BR of t -> W b to \"value\" (default: 1)."
+
+:Evaluate:  HPGetBrTopWb::usage =
+  "HPGetBrTopWb returns the t -> W b BR"
+
+:Evaluate:  HPGetSMCxn::usage =
+  "HPGetSMCxn[mass_Real, coll_String, prod_String] returns the cross section for a SM Higgs with the " <>
+  "mass \"mass\" for the collider \"coll\" and the production mode \"prod\"."
+
+:Evaluate:  HPGetSMBr::usage =
+  "HPGetSMBr[mass_Real, decay_String] returns the branching ratio for a SM Higgs with the " <>
+  "mass \"mass\" for the decay \"decay\"."
+
+:Evaluate:  HPGetSMTotalWidth::usage =
+  "HPGetSMTotalWidth[mass_Real] returns the total width for a SM Higgs with the " <>
+  "mass \"mass\"."
+
+:Evaluate:  HPAddParticle::usage =
+  "HPAddParticle[id_String, mass_Real, echarge_String, cp_String] adds a particle  with the name \"id\", the " <>
+  "mass \"mass\", the electrical charge \"echarge\", and the CP character \"cp\"."
+
+:Evaluate:  HPRemoveParticle::usage =
+  "HPRemoveParticle[id_String] removes the particle \"id\"."
+
+:Evaluate:  HPGetParticleIDs::usage =
+  "HPGetParticleIDs[] lists all particles."
+
+:Evaluate:  HPGetCP::usage =
+  "HPGetCharge[id_String] returns the CP character of the particle \"id\"."
+
+:Evaluate:  HPGetCharge::usage =
+  "HPGetCharge[id] returns the electrical charge of the particle \"id\"."
+
+:Evaluate:  HPSetMass::usage =
+  "HPSetMass[id_String, value_Real] sets the mass of the particle \"id\" to \"value\"."
+
+:Evaluate:  HPGetMass::usage =
+  "HPGetMass[id_String] returns the mass of the particle \"id\"."
+
+:Evaluate:  HPSetMassUnc::usage =
+  "HPSetMassUnc[id_String, value_Real] sets the mass uncertainty of the particle \"id\" to \"value\"."
+
+:Evaluate:  HPGetMassUnc::usage =
+  "HPGetMass[id_String] returns the mass uncertainty of the particle \"id\"."
+
+:Evaluate:  HPSetCxn::usage =
+  "HPSetCxn[id, coll, prod, value] sets the cross section for the particle " <>
+  "\"id\" at the collider \"coll\" for the production channel \"prod\" to \"val\""
+
+:Evaluate:  HPSetNormalizedCxn::usage =
+  "HPSetNormalizedCxn[id, coll, prod, value] sets the cross section for the particle " <>
+  "\"id\" at the collider \"coll\" for the production channel \"prod\" to \"val\"/XS_SM " <>
+  "(normalized to SM XS for this channel)"
+
+:Evaluate:  HPGetCxn::usage =
+  "HPGetCxn[id_String, coll_String, prod_String] returns the cross section for the particle " <>
+  "\"id\" at the collider \"coll\" for the production channel \"prod\"."
+
+:Evaluate:  HPSetDecayWidth::usage =
+  "HPSetDecayWidth[id_String, decay_String, value_Real] sets the decay width for the particle " <>
+  "\"id\" for the decay \"decay\" to the value \"value\"." <>
+  "HPSetDecayWidth[id1_String, chaindecay_String, iddaughter_String, value_Real] sets the decay width for the particle " <>
+  "\"id\" for the chain decay \"chaindecay\" and the daughter BSM particle \"iddaughter\" to the value \"value\"." <>
+  "HPSetDecayWidth[id_String, id1_String, id2_String, value_Real] sets the decay width for the particle " <>
+  "\"id\" to the daughter BSM particles \"id1\" and \"id2\" to the value \"value\"."
+
+:Evaluate:  HPSetBR::usage =
+  "HPSetBR[id_String, decay_String, value_Real] sets the branching ratio for the particle " <>
+  "\"id\" for the decay \"decay\" to the value \"value\"." <>
+  "HPSetBR[id1_String, chaindecay_String, iddaughter_String, value_Real] sets the branching ratio for the particle " <>
+  "\"id\" for the chain decay \"id\" and the daughter BSM particle \"iddaughter\" to the value \"value\"." <>
+  "HPSetBR[id_String, id1_String, id2_String, value_Real] sets the branching ratio for the particle " <>
+  "\"id\" to the daughter BSM particles \"id1\" and \"id2\" to the value \"value\"."
+
+:Evaluate:  HPGetBR::usage =
+  "HPGetBR[id_String, decay_String] returns the branching ratio for the particle \"id\" for the decay \"decay\"." <>
+  "HPGetBR[id1_String, chaindecay_String, iddaughter_String] returns the branching ratio for the particle \"id\" " <>
+  "for the chain decay \"id\" and the daughter BSM particle \"iddaughter\"." <>
+  "HPGetBR[id_String, id1_String, id2_String] returns the branching ratio for the particle " <>
+  "\"id\" to the daughter BSM particles \"id1\" and \"id2\"."
+
+:Evaluate:  HPEffectiveCouplingInput::usage =
+  "HPEffectiveCouplingInput[id_String] sets the effective couplings for the particle \"id\"."
+
+:Evaluate:  HPScaledSMlikeEffCouplings::usage =
+  "HPScaledSMlikeEffCouplings[id_String, scale_Real] sets the effective couplings for the particle \"id\" by rescaling the SM couplings by \"scale\"."
+
+:Evaluate:  HPSMLikeEffCouplings::usage =
+  "HPSMLikeEffCouplings[id_String] sets the couplings for the particle \"id\" to the SM values."
+
+:Evaluate:  HPSetCoupling::usage =
+  "HPSetCoupling[id_String, coup_String, value_Real] sets the coupling \"coup\" of the particle \"id\" " <>
+  "to \"value\"."
+
+:Evaluate:  HPGetCoupling::usage =
+  "HPGetCoupling[id_String, coup_String] returns the coupling \"coup\" of the particle \"id\"."
+
+:Evaluate:  HPSetTotalWidth::usage =
+  "HPSetTotalWidth[id_String, value_Real] sets the total width of the particle \"id\" to \"value\"."
+
+:Evaluate:  HPGetTotalWidth::usage =
+  "HPGetTotalWidth[id_String] returns the total width of the particle \"id\"."
+
+:Evaluate:  HPSetChannelRate::usage =
+  "HPSetChannelRate[id_String, coll_String, prod_String, decay_String, value_Real] sets the channel rate of the particle \"id\"" <>
+  "at the collider \"coll\" for the production channel \"prod\" to \"val\"."
+
+:Evaluate:  HPGetChannelRate::usage =
+  "HPGetChannelRate[id_String, coll_String, prod_String, decay_String] returns the channel rate of the particle \"id\"" <>
+  "at the collider \"coll\" for the production channel \"prod\"."
+
+:Evaluate:  HPResetChannelRates::usage =
+  "HPResetChannelRates[id_String] resets all channel rates for the particle \"id\"."
+
+:Evaluate:  HPSetBsmPairCxn::usage =
+  "HPSetBsmPairCxn[coll_String, id1_String, id2_String, value_Real] sets the cross section for non-resonant pair production " <>
+   "of BSM particles to the value \"value\", where \"coll\" identifies the collider; \"id1\", the first produced BSM " <>
+   "particle; \"id2\", the second produced BSM particle; and \"value\" is the corresponding " <>
+   "cross section."
+
+:Evaluate:  HPGetBsmPairCxn::usage =
+  "HPGetBsmPairCxn[coll_String, id1_String, id2_String] returns the cross section for non-resonant pair production " <>
+   "of BSM particles, where \"coll\" identifies the collider; \"id1\", the first produced BSM " <>
+   "particle; and \"id2\", the second produced BSM particle."
+
+::------------------------------------------------------------------------------
+
+:Evaluate:  HBInitialize::usage =
+  "HBInitialize[path_String] initializes HiggsBounds using the limit data at the given path " <>
+  "\"path\". The optional parameters \"applicableResolutionFac\", \"clusterMassUnc\", " <>
+  "\"applicableMassunc\", and \"setLimitMassUnc\" allow to control the behavior of " <>
+  "the limit setting procedure (see online documentation for additional information)."
+
+:Evaluate:  HBRetrieveOptions::usage =
+  "HBRetrieveOptions[] retrieves options set with HBInitialize."
+
+:Evaluate:  HBListLimits::usage =
+  "HBListLimits[] returns a list of all implemented experimental limits."
+
+:Evaluate:  HBApplyBounds::usage =
+  "HBApplyBounds[] returns whether the parameter point is allowed at 95% C.L.."
+
+:Evaluate:  HBGetAppliedBounds::usage =
+  "HBGetAppliedBounds[] returns a list of the applied limits."
+
+:Evaluate:  HBGetSelectedBounds::usage =
+  "HBGetSelectedBounds[] returns a list of the selected limits."
+
+::------------------------------------------------------------------------------
+
+:Evaluate:  HSInitialize::usage =
+  "HSInitialize[path_String] initializes HiggsSignals using the measurement data at the given path " <>
+  "\"path\". The optional parameters \"theoryMassUncPdf\", \"massSensitiveAssignmentRange\", " <>
+  "\"unassignedMassMeasurementPenalty\", \"unassignedCouplingMeasurementPenalty\",  " <>
+  "and \"rescaleToRefMass\" allow to control the behavior of " <>
+  "the chi2 calculation (see online documentation for additional information)."
+
+:Evaluate:  HSRetrieveOptions::usage =
+  "HSRetrieveOptions[] retrieves options set with HSInitialize."
+
+:Evaluate:  HSGetChisq::usage =
+  "HSGetChisq[] returns the chi2 value for the defined model predictions."
+
+:Evaluate:  HSGetChisqMeasurement::usage =
+  "HSGetChisq[id_Integer] returns the chi2 value for the measurement with the id \"id\"."
+
+:Evaluate:  HSGetObservableCount::usage =
+  "HSGetObservableCount[] returns the number of observables used in the chi2 calculation."
+
+:Evaluate:  HSListMeasurements::usage =
+  "HSListMeasurements[] lists all loaded measurements."
+
+:Evaluate:  HSListSubMeasurements::usage =
+  "HSListSubMeasurements[id_Integer] lists all submeasurements for the measurement with the id \"id\"."
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: helper functions
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:Evaluate: General::badsyntax =
+	"Incorrect syntax encountered."
+
+:Evaluate: HTAbort[f_Symbol] := (Message[f::badsyntax]; Abort[])
+:Evaluate: HTWrite[s_String] := WriteString[$Output, s]
+
+::------------------------------------------------------------------------------
+
+:Evaluate: Begin["`Private`"]
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: HiggsPredictions functions
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:Begin:
+:Function:      mHPSetBrTopWb
+:Pattern:       HPSetBrTopWb[value_]
+:Arguments:     {N[value]}
+:ArgumentTypes: {Real}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPSetBrTopWb := HTAbort[HPSetBrTopWb]
+
+:Begin:
+:Function:      mHPGetBrTopWb
+:Pattern:       HPGetBrTopWb[]
+:Arguments:     {}
+:ArgumentTypes: {}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetBrTopWb := HTAbort[HPGetBrTopWb]
+
+:Begin:
+:Function:      mHPGetSMCxn
+:Pattern:       HPGetSMCxn[mass_, collstring_, prodstring_]
+:Arguments:     {N[mass], collstring, prodstring}
+:ArgumentTypes: {Real, String, String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetSMCxn := HTAbort[HPGetSMCxn]
+
+:Begin:
+:Function:      mHPGetSMBr
+:Pattern:       HPGetSMBr[mass_, decaystring_]
+:Arguments:     {N[mass], decaystring}
+:ArgumentTypes: {Real, String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetSMBr := HTAbort[HPGetSMBr]
+
+:Begin:
+:Function:      mHPGetSMTotalWidth
+:Pattern:       HPGetSMTotalWidth[mass_]
+:Arguments:     {N[mass]}
+:ArgumentTypes: {Real}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetSMTotalWidth := HTAbort[HPGetSMTotalWidth]
+
+:Begin:
+:Function:      mHPAddParticle
+:Pattern:       HPAddParticle[id_, mass_, echarge_, cp_]
+:Arguments:     {id, N[mass], echarge, cp}
+:ArgumentTypes: {String, Real, String, String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPAddParticle := HTAbort[HPAddParticle]
+
+:Begin:
+:Function:      mHPRemoveParticle
+:Pattern:       HPRemoveParticle[id_]
+:Arguments:     {id}
+:ArgumentTypes: {String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPRemoveParticle := HTAbort[HPRemoveParticle]
+
+:Begin:
+:Function:      mHPGetParticleIDs
+:Pattern:       HPGetParticleIDs[]
+:Arguments:     {}
+:ArgumentTypes: {}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _mHPGetParticleIDs := HTAbort[mHPGetParticleIDs]
+
+:Begin:
+:Function:      mHPGetCP
+:Pattern:       HPGetCP[id_]
+:Arguments:     {id}
+:ArgumentTypes: {String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetCP := HTAbort[HPGetCP]
+
+:Begin:
+:Function:      mHPGetCharge
+:Pattern:       HPGetCharge[id_]
+:Arguments:     {id}
+:ArgumentTypes: {String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetCharge := HTAbort[HPGetCharge]
+
+:Begin:
+:Function:      mHPSetMass
+:Pattern:       HPSetMass[id_, value_]
+:Arguments:     {id, N[value]}
+:ArgumentTypes: {String, Real}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPSetMass := HTAbort[HPSetMass]
+
+:Begin:
+:Function:      mHPGetMass
+:Pattern:       HPGetMass[id_]
+:Arguments:     {id}
+:ArgumentTypes: {String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetMass := HTAbort[HPGetMass]
+
+:Begin:
+:Function:      mHPSetMassUnc
+:Pattern:       HPSetMassUnc[id_, value_]
+:Arguments:     {id, N[value]}
+:ArgumentTypes: {String, Real}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPSetMassUnc := HTAbort[HPSetMassUnc]
+
+:Begin:
+:Function:      mHPGetMassUnc
+:Pattern:       HPGetMassUnc[id_]
+:Arguments:     {id}
+:ArgumentTypes: {String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetMassUnc := HTAbort[HPGetMassUnc]
+
+:Begin:
+:Function:      mHPSetCxn
+:Pattern:       HPSetCxn[id_, collstring_, prodstring_, value_]
+:Arguments:     {id, collstring, prodstring, N[value]}
+:ArgumentTypes: {String, String, String, Real}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPSetCxn := HTAbort[HPSetCxn]
+
+:Begin:
+:Function:      mHPSetNormalizedCxn
+:Pattern:       HPSetNormalizedCxn[id_, collstring_, prodstring_, value_]
+:Arguments:     {id, collstring, prodstring, N[value]}
+:ArgumentTypes: {String, String, String, Real}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPSetNormalizedCxn := HTAbort[HPSetNormalizedCxn]
+
+:Begin:
+:Function:      mHPGetCxn
+:Pattern:       HPGetCxn[id_, collstring_, prodstring_]
+:Arguments:     {id, collstring, prodstring}
+:ArgumentTypes: {String, String, String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetCxn := HTAbort[HPGetCxn]
+
+:Begin:
+:Function:      mHPSetDecayWidth1
+:Pattern:       HPSetDecayWidth[id_, decaystring_, value_]
+:Arguments:     {id, decaystring, N[value]}
+:ArgumentTypes: {String, String, Real}
+:ReturnType:    Manual
+:End:
+
+:Begin:
+:Function:      mHPSetDecayWidth2
+:Pattern:       HPSetDecayWidth[id_, decaystring1_, decaystring2_, value_]
+:Arguments:     {id, decaystring1, decaystring2, N[value]}
+:ArgumentTypes: {String, String, String, Real}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPSetDecayWidth := HTAbort[HPSetDecayWidth]
+
+:Begin:
+:Function:      mHPSetBR1
+:Pattern:       HPSetBR[id_, decaystring_, value_]
+:Arguments:     {id, decaystring, N[value]}
+:ArgumentTypes: {String, String, Real}
+:ReturnType:    Manual
+:End:
+
+:Begin:
+:Function:      mHPSetBR2
+:Pattern:       HPSetBR[id_, decaystring1_, decaystring2_, value_]
+:Arguments:     {id, decaystring1, decaystring2, N[value]}
+:ArgumentTypes: {String, String, String, Real}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPSetBR := HTAbort[HPSetBR]
+
+
+:Begin:
+:Function:      mHPGetBR1
+:Pattern:       HPGetBR[id_, decaystring_]
+:Arguments:     {id, decaystring}
+:ArgumentTypes: {String, String}
+:ReturnType:    Manual
+:End:
+
+:Begin:
+:Function:      mHPGetBR2
+:Pattern:       HPGetBR[id_, decaystring1_, decaystring2_]
+:Arguments:     {id, decaystring1, decaystring2}
+:ArgumentTypes: {String, String, String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetBR := HTAbort[HPGetBR]
+
+:Begin:
+:Function:      mHPEffectiveCouplingInput
+:Pattern:       HPEffectiveCouplingInputInternal[id_, uuRe_, uuIm_, ddRe_, ddIm_, ccRe_, ccIm_, 
+                                                 ssRe_, ssIm_, ttRe_, ttIm_, bbRe_, bbIm_,
+                                                 eeRe_, eeIm_, mumuRe_, mumuIm_, tautauRe_, tautauIm_,
+                                                 WW_, ZZ_, Zgam_, gamgam_, gg_,
+                                                 refModel_, calcggH_, calcHgamgam_]
+:Arguments:     {id, N[uuRe], N[uuIm], N[ddRe], N[ddIm], N[ccRe], N[ccIm],
+                 N[ssRe], N[ssIm], N[ttRe], N[ttIm], N[bbRe], N[bbIm],
+                 N[eeRe], N[eeIm], N[mumuRe], N[mumuIm], N[tautauRe], N[tautauIm],
+                 N[WW], N[ZZ], N[Zgam], N[gamgam], N[gg],
+                 refModel, calcggH, calcHgamgam}
+:ArgumentTypes: {String, Real, Real, Real, Real, Real, Real, 
+                 Real, Real, Real, Real, Real, Real,
+                 Real, Real, Real, Real, Real, Real,
+                 Real, Real, Real, Real, Real,
+                 String, String, String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPEffectiveCouplingInputInternal := HTAbort[HPEffectiveCouplingInputInternal]
+
+:Evaluate: HPEffectiveCouplingInput[id_String, OptionsPattern[]] :=
+          HPEffectiveCouplingInputInternal[id,
+                                           OptionValue[uuRe], OptionValue[uuIm],
+                                           OptionValue[ddRe], OptionValue[ddIm],
+                                           OptionValue[ccRe], OptionValue[ccIm],
+                                           OptionValue[ssRe], OptionValue[ssIm],
+                                           OptionValue[ttRe], OptionValue[ttIm],
+                                           OptionValue[bbRe], OptionValue[bbIm],
+                                           OptionValue[eeRe], OptionValue[eeIm],
+                                           OptionValue[mumuRe], OptionValue[mumuIm],
+                                           OptionValue[tautauRe], OptionValue[tautauIm],
+                                           OptionValue[WW],
+                                           OptionValue[ZZ],
+                                           OptionValue[Zgam],
+                                           OptionValue[gamgam],
+                                           OptionValue[gg],
+                                           OptionValue[refModel],
+                                           ToString @ OptionValue[calcggH],
+                                           ToString @ OptionValue[calcHgamgam]
+                                          ];
+:Evaluate: Options[HPEffectiveCouplingInput] := {uuRe     -> 0.0, uuIm     -> 0.0,
+                                                 ddRe     -> 0.0, ddIm     -> 0.0,
+                                                 ccRe     -> 0.0, ccIm     -> 0.0,
+                                                 ssRe     -> 0.0, ssIm     -> 0.0,
+                                                 ttRe     -> 0.0, ttIm     -> 0.0,
+                                                 bbRe     -> 0.0, bbIm     -> 0.0,
+                                                 eeRe     -> 0.0, eeIm     -> 0.0,
+                                                 mumuRe   -> 0.0, mumuIm   -> 0.0,
+                                                 tautauRe -> 0.0, tautauIm -> 0.0,
+                                                 WW     -> 0.0,
+                                                 ZZ     -> 0.0,
+                                                 Zgam   -> 0.0,
+                                                 gamgam -> 0.0,
+                                                 gg     -> 0.0,
+                                                 refModel -> "SMHiggs",
+                                                 calcggH -> True,
+                                                 calcHgamgam -> True};
+:Evaluate: _HPEffectiveCouplingInput := HTAbort[HPEffectiveCouplingInput]
+
+:Evaluate: HPScaledSMlikeEffCouplings[id_String, scale_?NumberQ, OptionsPattern[]] :=
+          HPEffectiveCouplingInput[id,
+                                   uuRe     -> scale, uuIm     -> 0.0,
+                                   ddRe     -> scale, ddIm     -> 0.0,
+                                   ccRe     -> scale, ccIm     -> 0.0,
+                                   ssRe     -> scale, ssIm     -> 0.0,
+                                   ttRe     -> scale, ttIm     -> 0.0,
+                                   bbRe     -> scale, bbIm     -> 0.0,
+                                   eeRe     -> scale, eeIm     -> 0.0,
+                                   mumuRe   -> scale, mumuIm   -> 0.0,
+                                   tautauRe -> scale, tautauIm -> 0.0,
+                                   WW     -> scale,
+                                   ZZ     -> scale,
+                                   Zgam   -> scale,
+                                   gamgam -> scale,
+                                   gg     -> scale,
+                                   refModel    -> OptionValue[refModel],
+                                   calcggH     -> OptionValue[calcggH],
+                                   calcHgamgam -> OptionValue[calcHgamgam]
+                                  ]
+:Evaluate: Options[HPScaledSMlikeEffCouplings] := {refModel -> "SMHiggs",
+                                                   calcggH -> True,
+                                                   calcHgamgam -> True};
+:Evaluate: _HPScaledSMlikeEffCouplings := HTAbort[HPScaledSMlikeEffCouplings]
+
+:Evaluate: HPSMLikeEffCouplings[id_String, OptionsPattern[]] := 
+                HPScaledSMlikeEffCouplings[id, 1.,
+                                           refModel    -> OptionValue[refModel],
+                                           calcggH     -> OptionValue[calcggH],
+                                           calcHgamgam -> OptionValue[calcHgamgam]
+                                          ];
+:Evaluate: Options[HPSMLikeEffCouplings] := {refModel -> "SMHiggs",
+                                             calcggH -> True,
+                                             calcHgamgam -> True};
+:Evaluate: _HPSMLikeEffCouplings := HTAbort[HPSMLikeEffCouplings]
+
+:Begin:
+:Function:      mHPSetCoupling
+:Pattern:       HPSetCoupling[id_, coup_, value_]
+:Arguments:     {id, coup, N[value]}
+:ArgumentTypes: {String, String, Real}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPSetCoupling := HTAbort[HPSetCoupling]
+
+:Begin:
+:Function:      mHPGetCoupling
+:Pattern:       HPGetCoupling[id_, coup_]
+:Arguments:     {id, coup}
+:ArgumentTypes: {String, String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetCoupling := HTAbort[HPGetCoupling]
+
+:Begin:
+:Function:      mHPSetTotalWidth
+:Pattern:       HPSetTotalWidth[id_, value_]
+:Arguments:     {id, N[value]}
+:ArgumentTypes: {String, Real}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPSetTotalWidth := HTAbort[HPSetTotalWidth]
+
+:Begin:
+:Function:      mHPGetTotalWidth
+:Pattern:       HPGetTotalWidth[id_]
+:Arguments:     {id}
+:ArgumentTypes: {String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetTotalWidth := HTAbort[HPGetTotalWidth]
+
+:Begin:
+:Function:      mHPSetChannelRate
+:Pattern:       HPSetChannelRate[id_, collstring_, prodstring_, decaystring_, value_]
+:Arguments:     {id, collstring, prodstring, decaystring, N[value]}
+:ArgumentTypes: {String, String, String, String, Real}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPSetChannelRate := HTAbort[HPSetChannelRate]
+
+:Begin:
+:Function:      mHPGetChannelRate
+:Pattern:       HPGetChannelRate[id_, collstring_, prodstring_, decaystring_]
+:Arguments:     {id, collstring, prodstring, decaystring}
+:ArgumentTypes: {String, String, String, String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetChannelRate := HTAbort[HPGetChannelRate]
+
+:Begin:
+:Function:      mHPResetChannelRates
+:Pattern:       HPResetChannelRates[id_]
+:Arguments:     {id}
+:ArgumentTypes: {String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPResetChannelRates := HTAbort[HPResetChannelRates]
+
+:Begin:
+:Function:      mHPSetBsmPairCxn
+:Pattern:       HPSetBsmPairCxn[collstring_, id1_, id2_, value_]
+:Arguments:     {collstring, id1, id2, N[value]}
+:ArgumentTypes: {String, String, String, Real}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPSetBsmPairCxn := HTAbort[HPSetBsmPairCxn]
+
+:Begin:
+:Function:      mHPGetBsmPairCxn
+:Pattern:       HPGetBsmPairCxn[collstring_, id1_, id2_]
+:Arguments:     {collstring, id1, id2}
+:ArgumentTypes: {String, String, String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HPGetBsmPairCxn := HTAbort[HPGetBsmPairCxn]
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: HiggsBounds functions
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:Begin:
+:Function:      mHBInitialize
+:Pattern:       HBInitializeInternal[path_, res_, cmunc_, amunc_, slmunc_]
+:Arguments:     {path, res, cmunc, amunc, slmunc}
+:ArgumentTypes: {String, Real, String, String, String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: HBInitialize[path_, OptionsPattern[]] := HBInitializeInternal[path,
+                                                                         OptionValue[applicableResolutionFac],
+                                                                         OptionValue[clusterMassUnc],
+                                                                         OptionValue[applicableMassUnc],
+                                                                         OptionValue[setLimitMassUnc]
+                                                                         ];
+:Evaluate: Options[HBInitialize] := {applicableResolutionFac -> 0.5,
+                                     clusterMassUnc          -> "cautious",
+                                     applicableMassUnc       -> "cautious",
+                                     setLimitMassUnc         -> "cautious"};
+:Evaluate: _HBInitialize := HTAbort[HBInitialize]
+
+:Begin:
+:Function:      mHBRetrieveOptions
+:Pattern:       HBRetrieveOptions[]
+:Arguments:     {}
+:ArgumentTypes: {}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HBRetrieveOptions := HTAbort[HBRetrieveOptions]
+
+:Begin:
+:Function:      mHBListLimits
+:Pattern:       HBListLimits[]
+:Arguments:     {}
+:ArgumentTypes: {}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HBListLimits := HTAbort[HBListLimits]
+
+:Begin:
+:Function:      mHBApplyBounds
+:Pattern:       HBApplyBounds[]
+:Arguments:     {}
+:ArgumentTypes: {}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HBApplyBounds := HTAbort[HBApplyBounds]
+
+:Begin:
+:Function:      mHBGetAppliedBounds
+:Pattern:       HBGetAppliedBounds[]
+:Arguments:     {}
+:ArgumentTypes: {}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HBGetAppliedBounds := HTAbort[HBGetAppliedBounds]
+
+:Begin:
+:Function:      mHBGetSelectedBounds
+:Pattern:       HBGetSelectedBounds[]
+:Arguments:     {}
+:ArgumentTypes: {}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HBGetSelectedBounds := HTAbort[HBGetSelectedBounds]
+
+:Evaluate:  End[]
+:Evaluate:  EndPackage[]
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: HiggsSignals functions
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:Begin:
+:Function:      mHSInitialize
+:Pattern:       HSInitializeInternal[path_, pdf_, assignrange_, masspenalty_, couplingpenalty_, rescaletorefmass_, whichcorr_, theoryunc_]
+:Arguments:     {path, pdf, assignrange, masspenalty, couplingpenalty, rescaletorefmass, whichcorr, theoryunc}
+:ArgumentTypes: {String, String, Real, Real, Real, String, String, String}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: HSInitialize[path_, OptionsPattern[]] := HSInitializeInternal[path,
+                                                                         OptionValue[theoryMassUncPDF],
+                                                                         OptionValue[massSensitiveAssignmentRange],
+                                                                         OptionValue[unassignedMassMeasurementPenalty],
+                                                                         OptionValue[unassignedCouplingMeasurementPenalty],
+                                                                         OptionValue[rescaleToRefMassString],
+                                                                         OptionValue[whichCorrelationsString],
+                                                                         OptionValue[ignoreTheoryUncertainties]
+                                                                         ];
+:Evaluate: Options[HSInitialize] := {theoryMassUncPDF                     -> "box",
+                                     massSensitiveAssignmentRange         -> 3,
+                                     unassignedMassMeasurementPenalty     -> 2,
+                                     unassignedCouplingMeasurementPenalty -> 4,
+                                     rescaleToRefMassString               -> "withinMassUnc",
+                                     whichCorrelationsString              -> "both",
+                                     ignoreTheoryUncertainties            -> "False"};
+:Evaluate: _HSInitialize := HTAbort[HSInitialize]
+
+:Begin:
+:Function:      mHSRetrieveOptions
+:Pattern:       HSRetrieveOptions[]
+:Arguments:     {}
+:ArgumentTypes: {}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HSRetrieveOptions := HTAbort[HSRetrieveOptions]
+
+:Begin:
+:Function:      mHSGetChisq
+:Pattern:       HSGetChisq[]
+:Arguments:     {}
+:ArgumentTypes: {}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HSGetChisq := HTAbort[HSGetChisq]
+
+:Begin:
+:Function:      mHSGetChisqMeasurement
+:Pattern:       HSGetChisqMeasurement[id_]
+:Arguments:     {id}
+:ArgumentTypes: {Integer}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HSGetChisqMeasurement := HTAbort[HSGetChisqMeasurement]
+
+:Begin:
+:Function:      mHSGetObservableCount
+:Pattern:       HSGetObservableCount[]
+:Arguments:     {}
+:ArgumentTypes: {}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HSGetObservableCount := HTAbort[HSGetObservableCount]
+
+:Begin:
+:Function:      mHSListMeasurements
+:Pattern:       HSListMeasurements[]
+:Arguments:     {}
+:ArgumentTypes: {}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HSListMeasurements := HTAbort[HSListMeasurements]
+
+:Begin:
+:Function:      mHSListSubMeasurements
+:Pattern:       HSListSubMeasurements[id_]
+:Arguments:     {id}
+:ArgumentTypes: {Integer}
+:ReturnType:    Manual
+:End:
+
+:Evaluate: _HSListSubMeasurements := HTAbort[HSListSubMeasurements]

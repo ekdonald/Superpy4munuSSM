@@ -1,0 +1,238 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/PairProductionLimit.schema.json",
+    "type": "object",
+    "title": "Chain Decay Limit",
+    "description": "A 95% C.L. limit on the rate of a Higgs::predictions::PairProductionProcess that only depends on the masses of the involved BSM particles.\n The examples show: \n\n 1. A LHC search for non-resonant h125 pair production in the `4b` final state.\n 2. A LEP search for `ee -> h1 h2 -> bb tautau`. \n\n The data-grids in the examples are restricted to the first and last mass points for brevity.",
+    "examples": [
+        {
+            "limitClass": "PairProductionLimit",
+            "id": 181011854,
+            "reference": "1810.11854",
+            "source": "Tab. 5",
+            "citeKey": "CMS:2018sxu",
+            "collider": "LHC13",
+            "experiment": "CMS",
+            "luminosity": 35.9,
+            "process": {
+                "firstDecay": [
+                    "bb"
+                ],
+                "secondDecay": [
+                    "bb"
+                ]
+            },
+            "analysis": {
+                "equalParticleMasses": true,
+                "massResolution": {
+                    "firstParticle": {
+                        "absolute": 40,
+                        "relative": 0.0
+                    },
+                    "secondParticle": {
+                        "absolute": 40,
+                        "relative": 0.0
+                    }
+                },
+                "grid": {
+                    "massFirstParticle": [
+                        125.0
+                    ]
+                },
+                "limit": {
+                    "observed": [
+                        0.847
+                    ],
+                    "expected": [
+                        0.419
+                    ]
+                }
+            }
+        },
+        {
+            "limitClass": "PairProductionLimit",
+            "id": 60204220,
+            "reference": "hep-ex/0602042",
+            "source": "Fig 5c,d",
+            "citeKey": "ALEPH:2006tnd",
+            "collider": "LEP",
+            "experiment": "LEPComb",
+            "luminosity": 2.6,
+            "process": {
+                "firstDecay": [
+                    "tautau"
+                ],
+                "secondDecay": [
+                    "bb"
+                ]
+            },
+            "analysis": {
+                "massResolution": {
+                    "firstParticle": {
+                        "absolute": 3,
+                        "relative": 0
+                    },
+                    "secondParticle": {
+                        "absolute": 3,
+                        "relative": 0
+                    }
+                },
+                "grid": {
+                    "massFirstParticle": [
+                        10.0,
+                        180.0
+                    ],
+                    "massSecondParticle": [
+                        3.0,
+                        180.0
+                    ]
+                },
+                "limit": {
+                    "observed": [
+                        0.00056,
+                        0.81033,
+                        111.9377,
+                        1000000.0
+                    ],
+                    "expected": [
+                        0.0006,
+                        0.8400,
+                        100.87,
+                        1000000.0
+                    ]
+                }
+            }
+        }
+    ],
+    "required": [
+        "limitClass",
+        "id",
+        "reference",
+        "source",
+        "citeKey",
+        "collider",
+        "experiment",
+        "luminosity",
+        "process",
+        "analysis"
+    ],
+    "properties": {
+        "limitClass": {
+            "const": "PairProductionLimit"
+        },
+        "id": {
+            "$ref": "CommonDefs.schema.json#/id"
+        },
+        "reference": {
+            "$ref": "CommonDefs.schema.json#/reference"
+        },
+        "source": {
+            "$ref": "CommonDefs.schema.json#/source"
+        },
+        "citeKey": {
+            "$ref": "CommonDefs.schema.json#/citeKey"
+        },
+        "collider": {
+            "$ref": "CommonDefs.schema.json#/collider"
+        },
+        "experiment": {
+            "$ref": "CommonDefs.schema.json#/experiment"
+        },
+        "luminosity": {
+            "$ref": "CommonDefs.schema.json#/luminosity"
+        },
+        "process": {
+            "$ref": "PairProductionProcess.schema.json"
+        },
+        "constraints": {
+            "type": "object",
+            "description": "Assumptions made on the particles",
+            "properties": {
+                "firstParticle": {
+                    "$ref": "Constraints.schema.json#/constraints"
+                },
+                "secondParticle": {
+                    "$ref": "Constraints.schema.json#/constraints"
+                }
+            }
+        },
+        "analysis": {
+            "type": "object",
+            "description": "The actual data of the limit and properties of the experimental analysis.",
+            "required": [
+                "grid",
+                "limit"
+            ],
+            "properties": {
+                "massResolution": {
+                    "type": "object",
+                    "description": "Mass resolution(s) for the particles.",
+                    "properties": {
+                        "firstParticle": {
+                            "$ref": "CommonDefs.schema.json#/massResolution"
+                        },
+                        "secondParticle": {
+                            "$ref": "CommonDefs.schema.json#/massResolution"
+                        }
+                    }
+                },
+                "equalParticleMasses": {
+                    "type": "boolean",
+                    "description": "Is the limit given on a 1D (instead of 2D) grid where the particle masses are assumed to be equal?",
+                    "default": false
+                },
+                "grid": {
+                    "type": "object",
+                    "description": "Defines the grid on which the limits are given. For a PairProductionLimit with distinct particle masses this is the 2D regular grid spanned by `massFirstParticle`, and `massSecondParticle`. If `/analysis/equalParticleMasses` is true `massSecondParticle` is not required and the 1D grid `massFirstParticle` is used.",
+                    "properties": {
+                        "massFirstParticle": {
+                            "$ref": "CommonDefs.schema.json#/massGrid"
+                        },
+                        "massSecondParticle": {
+                            "$ref": "CommonDefs.schema.json#/massGrid"
+                        }
+                    },
+                    "required": [
+                        "massFirstParticle"
+                    ],
+                    "additionalProperties": false
+                },
+                "limit": {
+                    "type": "object",
+                    "description": "The actual data of the 95% C.L. limit **in `pb`**. The 1D `observed` and `expected` arrays are row-major-order flattened versions of the limits on the regular grid spanned by the masses. \nIf `/analysis/equalParticleMasses` is false, this is `limits[massFirstParticle, massSecondParticle]` defined on the regular grid spanned by `/analysis/grid/massFirstParticle`, and `/analysis/grid/massSecondParticle`; \nif it is true this is `limits[massFirstParticle]` defined on the grid `/analysis/grid/massFirstParticle`.",
+                    "properties": {
+                        "observed": {
+                            "$ref": "CommonDefs.schema.json#/observedLimit"
+                        },
+                        "expected": {
+                            "$ref": "CommonDefs.schema.json#/expectedLimit"
+                        }
+                    },
+                    "required": [
+                        "observed",
+                        "expected"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "if": {
+                "properties": {
+                    "equalParticleMasses": {
+                        "const": false
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "grid": {
+                        "required": [
+                            "massSecondParticle"
+                        ]
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,127 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/CommonDefs.schema.json",
+    "id": {
+        "type": "integer",
+        "exclusiveMinimum": 0,
+        "description": "A *unique* numeric id for the limit. Usually formed by the numeric part of the reference with an additional digit added if a single publication contains multiple limits."
+    },
+    "reference": {
+        "type": "string",
+        "description": "A reference that allows finding the underlying publication. Ideally an arXiv id, otherwise a collaboration preprint number."
+    },
+    "source": {
+        "type": "string",
+        "description": "The precise source of the implemented numbers. Ideally a HepData link, otherwise a figure or table number."
+    },
+    "citeKey": {
+        "type": "string",
+        "description": "The InspireHep cite key of the underlying publication."
+    },
+    "collider": {
+        "enum": [
+            "LHC8",
+            "LHC13",
+            "LEP"
+        ],
+        "description": "The collider (and energy) used to obtain this limit."
+    },
+    "experiment": {
+        "enum": [
+            "ATLAS",
+            "CMS",
+            "LHCComb",
+            "ALPEH",
+            "DELPHI",
+            "L3",
+            "OPAL",
+            "LEPComb"
+        ],
+        "description": "The experimental collaboration that sets this limit."
+    },
+    "luminosity": {
+        "type": "number",
+        "minimum": 0,
+        "description": "The integrated luminosity used for this limit, in `fb-1`."
+    },
+    "referenceModel": {
+        "enum": [
+            "SMHiggs",
+            "SMHiggsEW",
+            "SMHiggsInterp"
+        ],
+        "description": "A reference model. Options defined and documented in `include/Higgs/predictions/ReferenceModel.hpp`."
+    },
+    "productionMode": {
+        "type": "string",
+        "description": "A production mode, one of the modes defined in the Higgs::predictions::Production enum."
+    },
+    "decayMode": {
+        "type": "string",
+        "description": "A decay mode, one of the modes defined in the Higgs::predictions::Decay enum."
+    },
+    "massResolution": {
+        "type": "object",
+        "description": "Defines a mass resolution `m +- deltaM` with `deltaM = absolute + m * relative`.",
+        "default": {
+            "absolute": 0.0,
+            "relative": 0.0
+        },
+        "properties": {
+            "absolute": {
+                "type": "number",
+                "description": "absolute mass resolution in GeV"
+            },
+            "relative": {
+                "type": "number",
+                "minimum": 0,
+                "description": "relative mass resolution"
+            }
+        },
+        "required": [
+            "absolute",
+            "relative"
+        ],
+        "additionalProperties": false
+    },
+    "massGrid": {
+        "type": "array",
+        "description": "Strictly ascending mass values in GeV.",
+        "items": {
+            "type": "number",
+            "minimum": 0,
+            "description": "A mass value in GeV"
+        },
+        "minItems": 1,
+        "uniqueItems": true
+    },
+    "widthGrid": {
+        "type": "array",
+        "description": "Strictly ascending values for the total decay width in GeV (if `/analysis/relativeWidth` is false) or normalized to the particle mass (if `/analysis/relativeWidth` is true).",
+        "items": {
+            "type": "number",
+            "minimum": 0,
+            "description": "A value for the width"
+        },
+        "minItems": 1,
+        "uniqueItems": true
+    },
+    "observedLimit": {
+        "type": "array",
+        "description": "The observed limit.",
+        "items": {
+            "type": "number",
+            "mininum": 0
+        },
+        "minItems": 1
+    },
+    "expectedLimit": {
+        "type": "array",
+        "items": {
+            "type": "number",
+            "description": "The expected limit.",
+            "mininum": 0
+        },
+        "minItems": 1
+    }
+}

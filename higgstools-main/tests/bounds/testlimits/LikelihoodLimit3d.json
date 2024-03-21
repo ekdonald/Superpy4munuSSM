@@ -1,0 +1,9 @@
+{
+    "limitClass": "LikelihoodLimit",
+    "process": [
+        1,
+        2,
+        3
+    ],
+    "description": "3+ dimensions are not yet implemented"
+}

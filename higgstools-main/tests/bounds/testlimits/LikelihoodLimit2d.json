@@ -1,0 +1,112 @@
+{
+    "limitClass": "LikelihoodLimit",
+    "id": 14141414,
+    "reference": "2020.03003",
+    "citeKey": "Wittbrodt:20ab",
+    "collider": "LHC8",
+    "experiment": "ATLAS",
+    "luminosity": 39.1,
+    "process": [
+        {
+            "charge": "neutral",
+            "channels": [
+                [
+                    "H",
+                    "gamgam"
+                ]
+            ]
+        },
+        {
+            "charge": "neutral",
+            "channels": [
+                [
+                    "H",
+                    "mumu"
+                ]
+            ]
+        }
+    ],
+    "analysis": {
+        "massResolution": {
+            "relative": 0.2,
+            "absolute": 2
+        },
+        "stackedLlhGrid": [
+            {
+                "mass": 10,
+                "channels": [
+                    [
+                        0,
+                        10
+                    ],
+                    [
+                        0,
+                        5
+                    ]
+                ],
+                "observed": [
+                    0,
+                    7,
+                    6,
+                    15.5
+                ],
+                "expected": [
+                    0,
+                    11,
+                    15,
+                    9
+                ]
+            },
+            {
+                "mass": 200,
+                "channels": [
+                    [
+                        0,
+                        5
+                    ],
+                    [
+                        0,
+                        5
+                    ]
+                ],
+                "observed": [
+                    0,
+                    7,
+                    6,
+                    15.5
+                ],
+                "expected": [
+                    0,
+                    11,
+                    15,
+                    9
+                ]
+            },
+            {
+                "mass": 1000,
+                "channels": [
+                    [
+                        0,
+                        2
+                    ],
+                    [
+                        0,
+                        5
+                    ]
+                ],
+                "observed": [
+                    0,
+                    7,
+                    6,
+                    15.5
+                ],
+                "expected": [
+                    0,
+                    11,
+                    15,
+                    9
+                ]
+            }
+        ]
+    }
+}

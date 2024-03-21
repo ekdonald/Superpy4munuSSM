@@ -1,0 +1,117 @@
+{
+    "limitClass": "PairDecayLimit",
+    "citeKey": "Aad:1234",
+    "collider": "LHC13",
+    "reference": "2020.22222",
+    "experiment": "ATLAS",
+    "id": 7328721,
+    "luminosity": 30.0,
+    "analysis": {
+        "grid": {
+            "massFirstDaughter": [
+                50,
+                100,
+                150
+            ],
+            "massMother": [
+                100,
+                400,
+                500
+            ],
+            "massSecondDaughter": [
+                60,
+                120,
+                125
+            ]
+        },
+        "limit": {
+            "expected": [
+                10.0,
+                20.0,
+                30.0,
+                11.0,
+                21.0,
+                31.0,
+                12.0,
+                22.0,
+                32.0,
+                10.5,
+                20.5,
+                30.5,
+                11.5,
+                21.5,
+                31.5,
+                12.5,
+                22.5,
+                32.5,
+                10.9,
+                20.9,
+                30.9,
+                11.9,
+                21.9,
+                31.9,
+                12.9,
+                22.9,
+                32.9
+            ],
+            "observed": [
+                10.0,
+                20.0,
+                30.0,
+                11.0,
+                21.0,
+                31.0,
+                12.0,
+                22.0,
+                32.0,
+                10.5,
+                20.5,
+                30.5,
+                11.5,
+                21.5,
+                31.5,
+                12.5,
+                22.5,
+                32.5,
+                10.9,
+                20.9,
+                30.9,
+                11.9,
+                21.9,
+                31.9,
+                12.9,
+                22.9,
+                32.9
+            ]
+        },
+        "massResolution": {
+            "firstDaughter": {
+                "absolute": 10,
+                "relative": 0.1
+            },
+            "mother": {
+                "absolute": 10,
+                "relative": 0.1
+            },
+            "secondDaughter": {
+                "absolute": 10,
+                "relative": 0.1
+            }
+        }
+    },
+    "process": {
+        "collider": "LHC13",
+        "production": [
+            "ggH",
+            "bbH"
+        ],
+        "firstDecay": [
+            "gamgam",
+            "mumu"
+        ],
+        "secondDecay": [
+            "bb",
+            "mumu"
+        ]
+    }
+}

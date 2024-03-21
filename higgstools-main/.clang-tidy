@@ -1,0 +1,26 @@
+---
+Checks: "clang-diagnostic-*,
+clang-analyzer-*,
+cppcoreguidelines-*,
+bugprone-*,
+llvm-*,
+google-*,
+misc-*,
+modernize-*,
+performance-*,
+portability-*,
+readability-*,
+cert-*,
+-modernize-use-trailing-return-type,
+-google-readability-todo,
+-google-runtime-references,
+-*-else-after-return,
+-llvm-namespace-comment"
+FormatStyle: none
+CheckOptions:
+  - key: readability-magic-numbers.IgnoredFloatingPointValues
+    value: "1.0;2.0;100.0"
+  - key: cppcoreguidelines-avoid-magic-numbers.IgnoredFloatingPointValues
+    value: "1.0;2.0;100.0"
+---
+

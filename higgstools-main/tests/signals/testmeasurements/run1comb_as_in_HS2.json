@@ -1,0 +1,578 @@
+{
+    "id": 160602266,
+    "reference": "1606.02266",
+    "source": "values exactly as in HS-2 (rounded compared to hepdata)",
+    "citeKey": "ATLAS:2016neq",
+    "collider": "LHC8",
+    "experiment": "LHCComb",
+    "luminosity": 25,
+    "referenceMass": 125.09,
+    "referenceModel": "SMHiggs",
+    "massResolution": 0.24,
+    "subMeasurements": {
+        "mh125": {
+            "obsMass": [
+                124.85,
+                125.09,
+                125.33
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "ggH",
+                        "gamgam"
+                    ],
+                    [
+                        "ggH",
+                        "ZZ"
+                    ],
+                    [
+                        "bbH",
+                        "gamgam"
+                    ],
+                    [
+                        "bbH",
+                        "ZZ"
+                    ],
+                    [
+                        "vbfH",
+                        "gamgam"
+                    ],
+                    [
+                        "vbfH",
+                        "ZZ"
+                    ],
+                    [
+                        "HW",
+                        "gamgam"
+                    ],
+                    [
+                        "HW",
+                        "ZZ"
+                    ],
+                    [
+                        "HZ",
+                        "gamgam"
+                    ],
+                    [
+                        "HZ",
+                        "ZZ"
+                    ],
+                    [
+                        "Htt",
+                        "gamgam"
+                    ],
+                    [
+                        "Htt",
+                        "ZZ"
+                    ],
+                    [
+                        "schanHt",
+                        "gamgam"
+                    ],
+                    [
+                        "schanHt",
+                        "ZZ"
+                    ],
+                    [
+                        "tchanHt",
+                        "gamgam"
+                    ],
+                    [
+                        "tchanHt",
+                        "ZZ"
+                    ],
+                    [
+                        "HtW",
+                        "gamgam"
+                    ],
+                    [
+                        "HtW",
+                        "ZZ"
+                    ]
+                ]
+            }
+        },
+        "ggH_gamgam": {
+            "obs": [
+                0.0383,
+                0.0480,
+                0.0580
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "ggH",
+                        "gamgam"
+                    ],
+                    [
+                        "bbH",
+                        "gamgam"
+                    ]
+                ]
+            }
+        },
+        "ggH_ZZ": {
+            "obs": [
+                0.420,
+                0.580,
+                0.750
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "ggH",
+                        "ZZ"
+                    ],
+                    [
+                        "bbH",
+                        "ZZ"
+                    ]
+                ]
+            }
+        },
+        "ggH_WW": {
+            "obs": [
+                2.8,
+                3.5,
+                4.2
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "ggH",
+                        "WW"
+                    ],
+                    [
+                        "bbH",
+                        "WW"
+                    ]
+                ]
+            },
+            "massResolution": 5
+        },
+        "ggH_tautau": {
+            "obs": [
+                0.600,
+                1.300,
+                2.000
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "ggH",
+                        "tautau"
+                    ],
+                    [
+                        "bbH",
+                        "tautau"
+                    ]
+                ]
+            },
+            "massResolution": 20
+        },
+        "vbfH_gamgam": {
+            "obs": [
+                0.0028,
+                0.0046,
+                0.0065
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "vbfH",
+                        "gamgam"
+                    ]
+                ]
+            }
+        },
+        "vbfH_ZZ": {
+            "obs": [
+                -0.023,
+                0.003,
+                0.049
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "vbfH",
+                        "ZZ"
+                    ]
+                ]
+            }
+        },
+        "vbfH_WW": {
+            "obs": [
+                0.260,
+                0.390,
+                0.530
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "vbfH",
+                        "WW"
+                    ]
+                ]
+            },
+            "massResolution": 5
+        },
+        "vbfH_tautau": {
+            "obs": [
+                0.088,
+                0.125,
+                0.164
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "vbfH",
+                        "tautau"
+                    ]
+                ]
+            },
+            "massResolution": 20
+        },
+        "HW_gamgam": {
+            "obs": [
+                -0.0012,
+                0.0007,
+                0.0028
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "HW",
+                        "gamgam"
+                    ]
+                ]
+            }
+        },
+        "HW_WW": {
+            "obs": [
+                0.08,
+                0.24,
+                0.42
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "HW",
+                        "WW"
+                    ]
+                ]
+            },
+            "massResolution": 5
+        },
+        "HW_tautau": {
+            "obs": [
+                -0.125,
+                -0.064,
+                0.000
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "HW",
+                        "tautau"
+                    ]
+                ]
+            },
+            "massResolution": 20
+        },
+        "HW_bb": {
+            "obs": [
+                0.220,
+                0.420,
+                0.63
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "HW",
+                        "bb"
+                    ]
+                ]
+            },
+            "massResolution": 20
+        },
+        "HZ_gamgam": {
+            "obs": [
+                -0.0019,
+                0.0005,
+                0.0034
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "HZ",
+                        "gamgam"
+                    ]
+                ]
+            }
+        },
+        "HZ_WW": {
+            "obs": [
+                0.330,
+                0.530,
+                0.760
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "HZ",
+                        "WW"
+                    ]
+                ]
+            },
+            "massResolution": 5
+        },
+        "HZ_tautau": {
+            "obs": [
+                0.011,
+                0.058,
+                0.114
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "HZ",
+                        "tautau"
+                    ]
+                ]
+            },
+            "massResolution": 20
+        },
+        "HZ_bb": {
+            "obs": [
+                -0.01,
+                0.08,
+                0.17
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "HZ",
+                        "bb"
+                    ]
+                ]
+            },
+            "massResolution": 20
+        },
+        "Htt_gamgam": {
+            "obs": [
+                0.00026,
+                0.00064,
+                0.00112
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "Htt",
+                        "gamgam"
+                    ],
+                    [
+                        "schanHt",
+                        "gamgam"
+                    ],
+                    [
+                        "tchanHt",
+                        "gamgam"
+                    ],
+                    [
+                        "HtW",
+                        "gamgam"
+                    ]
+                ]
+            }
+        },
+        "Htt_WW": {
+            "obs": [
+                0.09,
+                0.14,
+                0.19
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "Htt",
+                        "WW"
+                    ],
+                    [
+                        "schanHt",
+                        "WW"
+                    ],
+                    [
+                        "tchanHt",
+                        "WW"
+                    ],
+                    [
+                        "HtW",
+                        "WW"
+                    ]
+                ]
+            },
+            "massResolution": 5
+        },
+        "Htt_tautau": {
+            "obs": [
+                -0.041,
+                -0.015,
+                0.015
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "Htt",
+                        "tautau"
+                    ],
+                    [
+                        "schanHt",
+                        "tautau"
+                    ],
+                    [
+                        "tchanHt",
+                        "tautau"
+                    ],
+                    [
+                        "HtW",
+                        "tautau"
+                    ]
+                ]
+            },
+            "massResolution": 20
+        },
+        "Htt_bb": {
+            "obs": [
+                0.01,
+                0.08,
+                0.15
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "Htt",
+                        "bb"
+                    ],
+                    [
+                        "schanHt",
+                        "bb"
+                    ],
+                    [
+                        "tchanHt",
+                        "bb"
+                    ],
+                    [
+                        "HtW",
+                        "bb"
+                    ]
+                ]
+            },
+            "massResolution": 20
+        }
+    },
+    "correlations": {
+        "experimental": {
+            "ggH_gamgam": {
+                "ggH_ZZ": 0.01,
+                "vbfH_gamgam": -0.25,
+                "vbfH_ZZ": -0.01,
+                "HW_gamgam": -0.03,
+                "HZ_gamgam": -0.14,
+                "Htt_gamgam": 0.01,
+                "Htt_WW": 0.01
+            },
+            "ggH_ZZ": {
+                "ggH_WW": 0.03,
+                "vbfH_gamgam": -0.01,
+                "vbfH_ZZ": -0.26,
+                "vbfH_WW": -0.01,
+                "vbfH_tautau": -0.01,
+                "HW_tautau": 0.01,
+                "HZ_WW": 0.01,
+                "HZ_tautau": 0.01,
+                "Htt_WW": -0.08,
+                "Htt_tautau": -0.02,
+                "Htt_bb": -0.02
+            },
+            "ggH_WW": {
+                "ggH_tautau": -0.01,
+                "vbfH_gamgam": 0.01,
+                "vbfH_WW": -0.16,
+                "HW_WW": -0.07,
+                "HW_tautau": 0.02,
+                "HZ_WW": -0.07,
+                "HZ_tautau": 0.01,
+                "Htt_WW": 0.01,
+                "Htt_bb": 0.01
+            },
+            "ggH_tautau": {
+                "vbfH_gamgam": 0.01,
+                "vbfH_ZZ": 0.01,
+                "vbfH_WW": 0.01,
+                "vbfH_tautau": -0.37,
+                "HW_WW": 0.03,
+                "HW_tautau": -0.25,
+                "HZ_WW": 0.01,
+                "HZ_tautau": -0.21,
+                "Htt_bb": 0.01
+            },
+            "vbfH_gamgam": {
+                "vbfH_ZZ": 0.02,
+                "vbfH_WW": 0.02,
+                "vbfH_tautau": 0.02,
+                "HZ_gamgam": 0.01,
+                "Htt_gamgam": -0.01
+            },
+            "vbfH_ZZ": {
+                "vbfH_WW": 0.02,
+                "vbfH_tautau": 0.02,
+                "Htt_WW": 0.04,
+                "Htt_tautau": 0.01,
+                "Htt_bb": 0.01
+            },
+            "vbfH_WW": {
+                "vbfH_tautau": 0.03,
+                "Htt_bb": -0.01
+            },
+            "vbfH_tautau": {
+                "HW_WW": -0.01,
+                "HW_tautau": 0.05,
+                "HZ_tautau": 0.04,
+                "Htt_bb": -0.01
+            },
+            "HW_gamgam": {
+                "HZ_gamgam": -0.64,
+                "Htt_gamgam": -0.03
+            },
+            "HW_WW": {
+                "HW_tautau": -0.12,
+                "HZ_WW": -0.12,
+                "HZ_tautau": 0.01,
+                "Htt_bb": 0.01
+            },
+            "HW_tautau": {
+                "HZ_WW": 0.02,
+                "HZ_tautau": -0.02,
+                "Htt_WW": 0.01
+            },
+            "HW_bb": {
+                "HZ_bb": -0.07
+            },
+            "HZ_gamgam": {
+                "Htt_gamgam": -0.11
+            },
+            "HZ_WW": {
+                "HZ_tautau": -0.05,
+                "Htt_WW": 0.01
+            },
+            "HZ_tautau": {
+                "Htt_WW": 0.01
+            },
+            "Htt_WW": {
+                "Htt_tautau": -0.47,
+                "Htt_bb": 0.01
+            }
+        }
+    }
+}

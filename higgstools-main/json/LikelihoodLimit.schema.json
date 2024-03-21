@@ -1,0 +1,206 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/LikelihoodLimit.schema.json",
+    "type": "object",
+    "title": "Channel Limit",
+    "description": "A limit expressed as a likelihood profile on the rate of multiple Higgs::predictions::ChannelProcesses and the mass of the particle.\nThe example shows an exclusion likelihood in the `tau tau` channel. The `/analysis/stackedLlhGrid` field that contains the actual data is not shown for brevity (see the documentation of that field for an example).",
+    "examples": [
+        {
+            "limitClass": "LikelihoodLimit",
+            "id": 200212223,
+            "reference": "2002.12223",
+            "citeKey": "Aad:2020zxo",
+            "source": "Tab. 23-36 (obs) & 37-50 (exp)",
+            "collider": "LHC13",
+            "experiment": "ATLAS",
+            "luminosity": 139.0,
+            "process": [
+                {
+                    "channels": [
+                        [
+                            "ggH",
+                            "tautau"
+                        ]
+                    ]
+                },
+                {
+                    "channels": [
+                        [
+                            "bbH",
+                            "tautau"
+                        ]
+                    ]
+                }
+            ],
+            "analysis": {
+                "massResolution": {
+                    "absolute": 5,
+                    "relative": 0.15
+                },
+                "stackedLlhGrid": []
+            }
+        }
+    ],
+    "required": [
+        "limitClass",
+        "id",
+        "reference",
+        "source",
+        "citeKey",
+        "collider",
+        "experiment",
+        "luminosity",
+        "process",
+        "analysis"
+    ],
+    "properties": {
+        "limitClass": {
+            "const": "LikelihoodLimit"
+        },
+        "id": {
+            "$ref": "CommonDefs.schema.json#/id"
+        },
+        "reference": {
+            "$ref": "CommonDefs.schema.json#/reference"
+        },
+        "source": {
+            "$ref": "CommonDefs.schema.json#/source"
+        },
+        "citeKey": {
+            "$ref": "CommonDefs.schema.json#/citeKey"
+        },
+        "collider": {
+            "$ref": "CommonDefs.schema.json#/collider"
+        },
+        "experiment": {
+            "$ref": "CommonDefs.schema.json#/experiment"
+        },
+        "luminosity": {
+            "$ref": "CommonDefs.schema.json#/luminosity"
+        },
+        "process": {
+            "type": "array",
+            "description": "The `n` processes that the likelihood depends on for a fixed mass. \nThe example shows the typical case for a likelihood in the di-tau channel. \n If any constraints refer to this process definition using `\"process\": \"signal\"` they are treated to refer to the merged process, i.e. the concatenation of all the channels into a single process.",
+            "examples": [
+                [
+                    {
+                        "channels": [
+                            [
+                                "ggH",
+                                "tautau"
+                            ]
+                        ]
+                    },
+                    {
+                        "channels": [
+                            [
+                                "bbH",
+                                "tautau"
+                            ]
+                        ]
+                    }
+                ]
+            ],
+            "items": {
+                "$ref": "ChannelProcess.schema.json"
+            }
+        },
+        "constraints": {
+            "$ref": "Constraints.schema.json#/constraintsWSignal"
+        },
+        "analysis": {
+            "type": "object",
+            "description": "The actual likelihood data and properties of the experimental analysis.",
+            "required": [
+                "stackedLlhGrid"
+            ],
+            "properties": {
+                "massResolution": {
+                    "$ref": "CommonDefs.schema.json#/massResolution"
+                },
+                "stackedLlhGrid": {
+                    "type": "array",
+                    "description": "The likelihood datagrids for each mass value.",
+                    "items": {
+                        "type": "object",
+                        "description": "Likelihood data on a grid of the channel rates for a fixed mass value.\n The example shows the simplest possible non-trivial case with 2 processes and 2 rate grid-points per process.",
+                        "required": [
+                            "channels",
+                            "mass",
+                            "observed",
+                            "expected"
+                        ],
+                        "examples": [
+                            {
+                                "mass": 100,
+                                "channels": [
+                                    [
+                                        0.0,
+                                        1.0
+                                    ],
+                                    [
+                                        0.0,
+                                        5.0
+                                    ]
+                                ],
+                                "observed": [
+                                    0.4,
+                                    10.0,
+                                    4.0,
+                                    13.0
+                                ],
+                                "expected": [
+                                    0.0,
+                                    8.0,
+                                    7.0,
+                                    15.0
+                                ]
+                            }
+                        ],
+                        "properties": {
+                            "mass": {
+                                "type": "number",
+                                "description": "A mass value in GeV",
+                                "minimum": 0
+                            },
+                            "channels": {
+                                "type": "array",
+                                "description": "The rate grid for the `n` channels. The length of this array has to match the number of processes in `/process`.",
+                                "items": {
+                                    "type": "array",
+                                    "description": "Strictly ascending rate grid for one of the processes. Each of these grids should start at `0.0` rate.",
+                                    "items": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Rate values in `pb`."
+                                    }
+                                }
+                            },
+                            "observed": {
+                                "type": "array",
+                                "description": "The row-major-order flattened observed likelihood defined on the regular grid spanned by the `/channels` rate grids. \n The likelihood profiles should be preprocessed as described in the HB-5 manual and implemented in `Higgs.tools.ExclusionLlh` to ensure that the points of vanishing rates is never excluded.",
+                                "items": {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "description": "`-2 ln(L)` values"
+                                }
+                            },
+                            "expected": {
+                                "type": "array",
+                                "description": "The row-major-order flattened expected likelihood defined on the regular grid spanned by the `/channels` rate grids.\n The normalization of the likelihood should be such that this vanishes for vanishing rates *for every mass*, i.e. the first element should always be `0.0`.",
+                                "items": {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "description": "`-2 ln(L)` values"
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

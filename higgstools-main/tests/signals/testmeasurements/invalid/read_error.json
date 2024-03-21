@@ -1,0 +1,32 @@
+{
+    "id": 200403447,
+    "reference": "2004.03447",
+    "source": "https://doi.org/10.17182/hepdata.94311.v1/t25, https://doi.org/10.17182/hepdata.94311.v1/t27, http://dgillber.web.cern.ch/dgillber/ggF_uncertainty_2017/corr2017.pdf",
+    "citeKey": "ATLAS:2020rej",
+    "collider": "LHC13",
+    "experiment": "ATLAS",
+    "luminosity": 139.0,
+    "referenceMass": 125,
+    "referenceModel": "SMHiggs",
+    "massResolution": 2.5,
+    "subMeasurements": {
+        "gg2H_0j_pTH_Low": {
+            "ref": [
+                0.151,
+                0.176
+            ],
+            "obs": [
+                0.115,
+                0.225
+            ],
+            "process": {
+                "channels": [
+                    [
+                        "H",
+                        "ZZ"
+                    ]
+                ]
+            }
+        }
+    }
+}

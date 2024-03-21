@@ -1,0 +1,70 @@
+.rst-content .section ol,
+.rst-content ol,
+.wy-plain-list-decimal,
+article ol {
+    list-style: decimal;
+    line-height: 24px;
+    margin-bottom: 24px
+}
+
+.rst-content .section ol li,
+.rst-content ol li,
+.wy-plain-list-decimal li,
+article ol li {
+    list-style: decimal;
+    margin-left: 24px
+}
+
+.rst-content .section ol li p:last-child,
+.rst-content .section ol li ul,
+.rst-content ol li p:last-child,
+.rst-content ol li ul,
+.wy-plain-list-decimal li p:last-child,
+.wy-plain-list-decimal li ul,
+article ol li p:last-child,
+article ol li ul {
+    margin-bottom: 0
+}
+
+.rst-content .section ol li ul li,
+.rst-content ol li ul li,
+.wy-plain-list-decimal li ul li,
+article ol li ul li {
+    list-style: disc
+}
+
+
+.rst-content .section ol,
+.rst-content ol.lowerroman,
+.wy-plain-list-decimal,
+article ol {
+    list-style: lower-roman;
+    line-height: 24px;
+    margin-bottom: 24px
+}
+
+.rst-content .section ol li,
+.rst-content ol.lowerroman li,
+.wy-plain-list-decimal li,
+article ol li {
+    list-style: lower-roman;
+    margin-left: 24px
+}
+
+.rst-content .section ol li p:last-child,
+.rst-content .section ol li ul,
+.rst-content ol.lowerroman li p:last-child,
+.rst-content ol.lowerroman li ul,
+.wy-plain-list-decimal li p:last-child,
+.wy-plain-list-decimal li ul,
+article ol li p:last-child,
+article ol li ul {
+    margin-bottom: 0
+}
+
+.rst-content .section ol li ul li,
+.rst-content ol.lowerroman li ul li,
+.wy-plain-list-decimal li ul li,
+article ol li ul li {
+    list-style: disc
+}

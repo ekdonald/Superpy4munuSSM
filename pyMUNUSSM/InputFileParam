@@ -1,0 +1,479 @@
+------------------------------------------------------------------------------------------------------------------------------
+---------- ##### INPUT FILE 2 ##### ----------
+-------------- ## PARAMETERS ## --------------
+
+# by DONALD KPATCHA, 2024 #
+
+## SET HERE PARAMETERS OPTIONS FOR THE MODEL
+
+## Leave the white spaces in the lines with flags as they are here.
+## InputFileParam is read by "Priors.py". Check that file if you want to customize this options even more.
+## possible types of input paramters
+## FixedParameter(x), LinearParameter(min, max), LogParameter(min, max),  NegLogParameter(min, max)
+------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+----------------------------------------
+## INPUT PARAMETERS FORMAT ##
+
+# "A", "B", "C", "D", without the "" and with those caps.
+# e.g. Diagonal matrix, GUT relation, etc
+----------------------------------------
+
+InputParamFormat = B
+
+* Full scan test 1, only InputParamFormat C and D *
+
+
+# "A": every entry outside the diagonal can be set to a specific value, and they WILL appear in MultiNest output as parameter
+# "B": every entry outside the diagonal will be set 0 (except Yukawa matrix for neutrinos) and WILL NOT! appear in MultiNest output as parameter
+# "C": every entry outside the diagonal will be set 0, as in "B" Plus:
+        m2_ii=m2_11,
+        bv_ii=bv_11,
+        Tbv_ii=Tbv_11,
+        Tu_22=Tu_11, but Tu_33 =/= Tu_11,
+        Td_22=Td_11, but Td_33 =/= Td_11,
+        Te_22=Te_11, but Te_33 =/= Te_11,
+        Tv_22=Tv_11, but Tv_33 =/= Tv_11,
+        GUT relation: (M3=3*M2=6*M1)
+    Yukawa matrix for neutrinos complete, Tu diagonal but no Tu_ii=Tu_11
+# "D": as in "C" but instead of T, A is the input, T_x = A_x * x, with x={lambda, kappa, bv, Yv, Ye, Yu, Yd}
+
+************************************************************************************************************************
+
+
+
+
+----------------------------------------
+## IF InputParamFormat = A ##
+----------------------------------------
+
+    # Number of free model parameters (yes, you have to be very careful an count them)
+NparamA = 7
+
+    # Renormalization scale
+renormscaleA = FixedParameter(1500)
+
+    # Soft masses for gauginos.
+M1A = FixedParameter(1.45748370E+02)
+M2A = FixedParameter(2.91496741E+02)
+M3A = FixedParameter(3.50001001E+03)
+
+    # Ratio of Higgs VEVs, defined at EW scale.
+tanbetaA = LogParameter(2, 2)
+
+    #Couplings in the superpotential and soft-breaking counter-parts
+
+    # lambda S H H in MUNUSSM superpotential.
+lambda1A = LinearParameter (0.125, 0.127)
+lambda2A = FixedParameter(1.26100004E-01)
+lambda3A = FixedParameter(1.26100004E-01)
+
+    # Tlambda S H H MUNUSSM soft-breaking term (Tlambda = Alambda * lambda). Tlambda1A = LogParameter(1, 1500)
+Tlambda1A = FixedParameter(1000)
+Tlambda2A = FixedParameter(1000)
+Tlambda3A = FixedParameter(1000)
+
+    # kappa S S S in MUNUSSM superpotential.
+kappa1A = LogParameter(0.5, 0.5)
+kappa2A = LogParameter(0.5, 0.5)
+kappa3A = LogParameter(0.5, 0.5)
+
+    # Tkappa S S S in MUNUSSM soft-breaking term (Tkappa = Akappa * kappa). Tkappa1A = NegLogParameter(-1, -1)
+Tkappa1A = FixedParameter(-800)
+Tkappa2A = FixedParameter(-800)
+Tkappa3A = FixedParameter(-800)
+
+
+    # Right handed neutrino vevs
+vR1A = FixedParameter(3500)
+vR2A = FixedParameter(3500)
+vR3A = FixedParameter(3500)
+
+    # Left handed neutrino vevs
+vL1A = FixedParameter(3500)
+vL2A = FixedParameter(3500)
+vL3A = FixedParameter(3500)
+
+    # Left handed neutrino vevs
+mlHd21A = FixedParameter(0.0)
+mlHd22A = FixedParameter(0.0)
+mlHd23A = FixedParameter(0.0)
+
+	#Yukawa matrix, neutrinos
+
+    # Y_v		Y_v L H_u N term in the superpotential
+Yv11A = FixedParameter(1.100000E-06)
+Yv12A = FixedParameter(0.0)
+Yv13A = FixedParameter(0.0)
+Yv21A = FixedParameter(0.0)
+Yv22A = FixedParameter(1.770000E-06)
+Yv23A = FixedParameter(0.0)
+Yv31A = FixedParameter(0.0)
+Yv32A = FixedParameter(0.0)
+Yv33A = FixedParameter(4.050000E-06)
+
+
+	#Soft-breaking masses for all the particles
+
+    # m^2_d.
+m2d11A = FixedParameter(2.250000E+06)
+m2d12A = FixedParameter(0.0)
+m2d13A = FixedParameter(0.0)
+m2d21A = FixedParameter(0.0)
+m2d22A = FixedParameter(2.250000E+06)
+m2d23A = FixedParameter(0.0)
+m2d31A = FixedParameter(0.0)
+m2d32A = FixedParameter(0.0)
+m2d33A = FixedParameter(2.250000E+06)
+
+    # m^2_u.
+m2u11A = FixedParameter(2.250000E+06)
+m2u12A = FixedParameter(0.0)
+m2u13A = FixedParameter(0.0)
+m2u21A = FixedParameter(0.0)
+m2u22A = FixedParameter(2.250000E+06)
+m2u23A = FixedParameter(0.0)
+m2u31A = FixedParameter(0.0)
+m2u32A = FixedParameter(0.0)
+m2u33A = FixedParameter(2.250000E+06)
+
+    # m^2_Q.
+m2Q11A = FixedParameter(2.250000E+06)
+m2Q12A = FixedParameter(0.0)
+m2Q13A = FixedParameter(0.0)
+m2Q21A = FixedParameter(0.0)
+m2Q22A = FixedParameter(2.250000E+06)
+m2Q23A = FixedParameter(0.0)
+m2Q31A = FixedParameter(0.0)
+m2Q32A = FixedParameter(0.0)
+m2Q33A = FixedParameter(2.250000E+06)
+
+    # m^2_e.
+m2e11A = FixedParameter(2.250000E+06)
+m2e12A = FixedParameter(0.0)
+m2e13A = FixedParameter(0.0)
+m2e21A = FixedParameter(0.0)
+m2e22A = FixedParameter(2.250000E+06)
+m2e23A = FixedParameter(0.0)
+m2e31A = FixedParameter(0.0)
+m2e32A = FixedParameter(0.0)
+m2e33A = FixedParameter(2.250000E+06)
+
+    # m^2_v.
+m2v11A = FixedParameter(0.0)
+m2v12A = FixedParameter(0.0)
+m2v13A = FixedParameter(0.0)
+m2v21A = FixedParameter(0.0)
+m2v22A = FixedParameter(0.0)
+m2v23A = FixedParameter(0.0)
+m2v31A = FixedParameter(0.0)
+m2v32A = FixedParameter(0.0)
+m2v33A = FixedParameter(0.0)
+
+    # m^2_L.
+m2L11A = FixedParameter(0.0)
+m2L12A = FixedParameter(0.0)
+m2L13A = FixedParameter(0.0)
+m2L21A = FixedParameter(0.0)
+m2L22A = FixedParameter(0.0)
+m2L23A = FixedParameter(0.0)
+m2L31A = FixedParameter(0.0)
+m2L32A = FixedParameter(0.0)
+m2L33A = FixedParameter(0.0)
+
+
+	#Other Soft-breaking terms
+
+    # Td_ij  # Td_ij H_d Q d in MUNUSSM soft-breaking term (Td = Ad * Yd).
+Td11A = FixedParameter(0.0)
+Td12A = FixedParameter(0.0)
+Td13A = FixedParameter(0.0)
+Td21A = FixedParameter(0.0)
+Td22A = FixedParameter(0.0)
+Td23A = FixedParameter(0.0)
+Td31A = FixedParameter(0.0)
+Td32A = FixedParameter(0.0)
+Td33A = LinearParameter(100, 100)
+
+    # Tu_ij  # Tu_ij H_u Q u in MUNUSSM soft-breaking term (Tu = Au * Yu).
+Tu11A = FixedParameter(0.0)
+Tu12A = FixedParameter(0.0)
+Tu13A = FixedParameter(0.0)
+Tu21A = FixedParameter(0.0)
+Tu22A = FixedParameter(0.0)
+Tu23A = FixedParameter(0.0)
+Tu31A = FixedParameter(0.0)
+Tu32A = FixedParameter(0.0)
+Tu33A = FixedParameter(-4.37500977E+03)
+
+    # Te_ij  # Te_ij H_d L e in MUNUSSM soft-breaking term (Te = Ae * Ye).
+Te11A = FixedParameter(0.0)
+Te12A = FixedParameter(0.0)
+Te13A = FixedParameter(0.0)
+Te21A = FixedParameter(0.0)
+Te22A = FixedParameter(0.0)
+Te23A = FixedParameter(0.0)
+Te31A = FixedParameter(0.0)
+Te32A = FixedParameter(0.0)
+Te33A = LinearParameter(40, 40)
+
+    # Tv_ij  # Tv_ij H_u L N in MUNUSSM soft-breaking term (Tv = Av * Yv).
+Tv11A = FixedParameter(-1.000000E-03)
+Tv12A = FixedParameter(0.0)
+Tv13A = FixedParameter(0.0)
+Tv21A = FixedParameter(0.0)
+Tv22A = FixedParameter(-1.000000E-03)
+Tv23A = FixedParameter(0.0)
+Tv31A = FixedParameter(0.0)
+Tv32A = FixedParameter(0.0)
+Tv33A = FixedParameter(-1.000000E-03)
+
+
+
+# Nusisance parameters.
+
+    # Bottom MS-bar mass.
+    # PDG.
+    # http://pdg8.lbl.gov/rpp2014v1/pdgLive/DataBlock.action?node=Q005M
+mbA = FixedParameter(4.18)
+# GaussParameter(4.18, 0.03)
+
+    # Top pole mass.
+    # PDG.
+    # http://pdg8.lbl.gov/rpp2014v1/pdgLive/DataBlock.action?node=Q007T7
+mtA = FixedParameter(173.21)
+# GaussParameter(173.21,(0.51 ** 2 + 0.71 ** 2) ** 0.5)
+
+    # Strong coupling.
+    # PDG
+    # http://pdg.lbl.gov/2014/reviews/rpp2014-rev-qcd.pdf
+alphasA = FixedParameter(0.1185)
+# GaussParameter(0.1185, 0.0006)
+
+    # Reciprocal of EM coupling at MZ.
+    # PDG.
+    # http://pdg.lbl.gov/2014/reviews/rpp2014-rev-standard-model.pd
+invalphaA = FixedParameter(127.940)
+# GaussParameter(127.940, 0.014)
+
+
+
+
+----------------------------------------
+## IF InputParamFormat = B ##
+----------------------------------------
+
+    # Number of free model parameters (yes, you have to be very careful an count them)
+NparamB = 7
+
+    # Renormalization scale
+renormscaleB = FixedParameter(1500)
+
+    # Soft masses for gauginos.
+M1B = FixedParameter(1.45748370E+02)
+M2B = FixedParameter(2.91496741E+02)
+M3B = FixedParameter(3.50001001E+03)
+
+    # Ratio of Higgs VEVs, defined at EW scale.
+tanbetaB = LogParameter(2.76130104E+01, 2.76130104E+01)
+
+    #Couplings in the superpotential and soft-breaking counter-parts
+
+    # lambda S H H in MUNUSSM superpotential.
+lambda1B = LinearParameter(0.125, 0.127)
+lambda2B = FixedParameter(1.26100004E-01)
+lambda3B = FixedParameter(1.26100004E-01)
+
+    # Tlambda S H H MUNUSSM soft-breaking term (TlambdB = Alambda * lambda). Tlambda1B = LogParameter(1, 1500)
+Tlambda1B = FixedParameter(1000.0)
+Tlambda2B = FixedParameter(1000.0)
+Tlambda3B = FixedParameter(1000.0)
+
+    # kappa S S S in MUNUSSM superpotential.
+kappa1B = LogParameter(3.61000001E-01, 3.62000001E-01)
+kappa2B = FixedParameter(3.61000001E-01)
+kappa3B = FixedParameter(3.61000001E-01)
+
+    # Tkappa S S S in MUNUSSM soft-breaking term (TkappB = Akappa * kappa). Tkappa1B = NegLogParameter(-1, -1)
+Tkappa1B = FixedParameter(-150.0)
+Tkappa2B = FixedParameter(-150.0)
+Tkappa3B = FixedParameter(-150.0)
+
+
+    # Right handed neutrino vevs
+vR1B = FixedParameter(3000)
+vR2B = FixedParameter(3000)
+vR3B = FixedParameter(3000)
+
+    # Left handed neutrino vevs
+vL1B = FixedParameter(4.72724630E-05)
+vL2B = FixedParameter(2.28752674E-04)
+vL3B = FixedParameter(1.44005737E-04)
+
+    # Left handed neutrino vevs
+mlHd21B = FixedParameter(0.0)
+mlHd22B = FixedParameter(0.0)
+mlHd23B = FixedParameter(0.0)
+
+	#Yukawa matrix, neutrinos
+
+    # Y_v		Y_v L H_u N term in the superpotential
+Yv11B = FixedParameter(6.46503966E-07)
+Yv12B = FixedParameter(0.0)
+Yv13B = FixedParameter(0.0)
+Yv21B = FixedParameter(0.0)
+Yv22B = FixedParameter(3.59148461E-07)
+Yv23B = FixedParameter(0.0)
+Yv31B = FixedParameter(0.0)
+Yv32B = FixedParameter(0.0)
+Yv33B = FixedParameter(8.84921493E-07)
+
+
+	#Soft-breaking masses for all the particles
+
+    # m^2_d.
+m2d11B = FixedParameter(2.250000E+06)
+m2d12B = FixedParameter(0.0)
+m2d13B = FixedParameter(0.0)
+m2d21B = FixedParameter(0.0)
+m2d22B = FixedParameter(2.250000E+06)
+m2d23B = FixedParameter(0.0)
+m2d31B = FixedParameter(0.0)
+m2d32B = FixedParameter(0.0)
+m2d33B = FixedParameter(2.250000E+06)
+
+    # m^2_u.
+m2u11B = FixedParameter(2.250000E+06)
+m2u12B = FixedParameter(0.0)
+m2u13B = FixedParameter(0.0)
+m2u21B = FixedParameter(0.0)
+m2u22B = FixedParameter(2.250000E+06)
+m2u23B = FixedParameter(0.0)
+m2u31B = FixedParameter(0.0)
+m2u32B = FixedParameter(0.0)
+m2u33B = FixedParameter(6.25005005E+06)
+
+    # m^2_Q.
+m2Q11B = FixedParameter(2.250000E+06)
+m2Q12B = FixedParameter(0.0)
+m2Q13B = FixedParameter(0.0)
+m2Q21B = FixedParameter(0.0)
+m2Q22B = FixedParameter(2.250000E+06)
+m2Q23B = FixedParameter(0.0)
+m2Q31B = FixedParameter(0.0)
+m2Q32B = FixedParameter(0.0)
+m2Q33B = FixedParameter(6.25005005E+06)
+
+    # m^2_e.
+m2e11B = FixedParameter(2.250000E+06)
+m2e12B = FixedParameter(0.0)
+m2e13B = FixedParameter(0.0)
+m2e21B = FixedParameter(0.0)
+m2e22B = FixedParameter(2.250000E+06)
+m2e23B = FixedParameter(0.0)
+m2e31B = FixedParameter(0.0)
+m2e32B = FixedParameter(0.0)
+m2e33B = FixedParameter(2.250000E+06)
+
+    # m^2_v.
+m2v11B = FixedParameter(0.0)
+m2v12B = FixedParameter(0.0)
+m2v13B = FixedParameter(0.0)
+m2v21B = FixedParameter(0.0)
+m2v22B = FixedParameter(0.0)
+m2v23B = FixedParameter(0.0)
+m2v31B = FixedParameter(0.0)
+m2v32B = FixedParameter(0.0)
+m2v33B = FixedParameter(0.0)
+
+    # m^2_L.
+m2L11B = FixedParameter(0.0)
+m2L12B = FixedParameter(0.0)
+m2L13B = FixedParameter(0.0)
+m2L21B = FixedParameter(0.0)
+m2L22B = FixedParameter(0.0)
+m2L23B = FixedParameter(0.0)
+m2L31B = FixedParameter(0.0)
+m2L32B = FixedParameter(0.0)
+m2L33B = FixedParameter(0.0)
+
+
+	#Other Soft-breaking terms
+
+    # Td_ij  # Td_ij H_d Q d in MUNUSSM soft-breaking term (Td = Ad * Yd).
+Td11B = FixedParameter(0.0)
+Td12B = FixedParameter(0.0)
+Td13B = FixedParameter(0.0)
+Td21B = FixedParameter(0.0)
+Td22B = FixedParameter(0.0)
+Td23B = FixedParameter(0.0)
+Td31B = FixedParameter(0.0)
+Td32B = FixedParameter(0.0)
+Td33B = LinearParameter(100.0, 100.0)
+
+    # Tu_ij  # Tu_ij H_u Q u in MUNUSSM soft-breaking term (Tu = Au * Yu).
+Tu11B = FixedParameter(0.0)
+Tu12B = FixedParameter(0.0)
+Tu13B = FixedParameter(0.0)
+Tu21B = FixedParameter(0.0)
+Tu22B = FixedParameter(0.0)
+Tu23B = FixedParameter(0.0)
+Tu31B = FixedParameter(0.0)
+Tu32B = FixedParameter(0.0)
+Tu33B = FixedParameter(-4.37500977E+03)
+
+    # Te_ij  # Te_ij H_d L e in MUNUSSM soft-breaking term (Te = Ae * Ye).
+Te11B = FixedParameter(0.0)
+Te12B = FixedParameter(0.0)
+Te13B = FixedParameter(0.0)
+Te21B = FixedParameter(0.0)
+Te22B = FixedParameter(0.0)
+Te23B = FixedParameter(0.0)
+Te31B = FixedParameter(0.0)
+Te32B = FixedParameter(0.0)
+Te33B = FixedParameter(40.0)
+
+    # Tv_ij  # Tv_ij H_u L N in MUNUSSM soft-breaking term (Tv = Av * Yv).
+Tv11B = FixedParameter(-1.000000E-03)
+Tv12B = FixedParameter(0.0)
+Tv13B = FixedParameter(0.0)
+Tv21B = FixedParameter(0.0)
+Tv22B = FixedParameter(-1.000000E-03)
+Tv23B = FixedParameter(0.0)
+Tv31B = FixedParameter(0.0)
+Tv32B = FixedParameter(0.0)
+Tv33B = FixedParameter(-1.000000E-03)
+
+
+
+# Nusisance parameters.
+
+    # Bottom MS-bar mass.
+    # PDG.
+    # http://pdg8.lbl.gov/rpp2014v1/pdgLive/DataBlock.action?node=Q005M
+mbB = FixedParameter(4.18)
+# GaussParameter(4.18, 0.03)
+
+    # Top pole mass.
+    # PDG.
+    # http://pdg8.lbl.gov/rpp2014v1/pdgLive/DataBlock.action?node=Q007T7
+mtB = FixedParameter(173.21)
+# GaussParameter(173.21,(0.51 ** 2 + 0.71 ** 2) ** 0.5)
+
+    # Strong coupling.
+    # PDG
+    # http://pdg.lbl.gov/2014/reviews/rpp2014-rev-qcd.pdf
+alphasB = FixedParameter(0.1185)
+# GaussParameter(0.1185, 0.0006)
+
+    # Reciprocal of EM coupling at MZ.
+    # PDG.
+    # http://pdg.lbl.gov/2014/reviews/rpp2014-rev-standard-model.pd
+invalphaB = FixedParameter(127.940)
+# GaussParameter(127.940, 0.014)
+
+
+

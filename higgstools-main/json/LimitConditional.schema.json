@@ -1,0 +1,92 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/LimitConditional.schema.json",
+    "title": "Limit",
+    "description": "A json representation of a Higgs::bounds::Limit. All different possible limit types are shown here. They are distinguished by different values of the `/limitClass` property. The different values of this property are also the titles of the cases below. Every limit file for HiggsBounds has to validate against this schema.",
+    "properties": {
+        "limitClass": {
+            "enum": [
+                "ChannelLimit",
+                "ChannelWidthLimit",
+                "ChainDecayLimit",
+                "PairDecayLimit",
+                "LikelihoodLimit",
+                "PairProductionLimit"
+            ]
+        }
+    },
+    "allOf": [
+        {
+            "if": {
+                "properties": {
+                    "limitClass": {
+                        "const": "ChannelLimit"
+                    }
+                }
+            },
+            "then": {
+                "$ref": "ChannelLimit.schema.json"
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "limitClass": {
+                        "const": "ChannelWidthLimit"
+                    }
+                }
+            },
+            "then": {
+                "$ref": "ChannelWidthLimit.schema.json"
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "limitClass": {
+                        "const": "ChainDecayLimit"
+                    }
+                }
+            },
+            "then": {
+                "$ref": "ChainDecayLimit.schema.json"
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "limitClass": {
+                        "const": "PairDecayLimit"
+                    }
+                }
+            },
+            "then": {
+                "$ref": "PairDecayLimit.schema.json"
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "limitClass": {
+                        "const": "PairProductionLimit"
+                    }
+                }
+            },
+            "then": {
+                "$ref": "PairProductionLimit.schema.json"
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "limitClass": {
+                        "const": "LikelihoodLimit"
+                    }
+                }
+            },
+            "then": {
+                "$ref": "LikelihoodLimit.schema.json"
+            }
+        }
+    ]
+}

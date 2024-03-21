@@ -1,0 +1,60 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/ChainDecayProcess.schema.json",
+    "title": "ChainDecayProcess",
+    "type": "object",
+    "description": "A process involving a chain decay of a BSM particle into another BSM particle and a SM particle. Corresponds to a Higgs::predictions::ChainDecayProcess. The process is defined by a list of production modes `p` for the mother particle, the type of the chain decay, and a list of decay modes `d` for the daughter particle. The rate is obtained as the sum over all possible combinations of `p` and `d`.\n The examples show:\n\n 1. the process `p p -> H2 -> Z H1 -> Z gamgam` for a mother particle `H1` and a daughter particle `H2`\n 2. the process `p p -> W-+ H+- ->  W-+ W+- H -> W-+ W+- bb` for a charged mother particle `H+-` and a neutral daughter particle `H`.",
+    "required": [
+        "production",
+        "chain",
+        "decay"
+    ],
+    "examples": [
+        {
+            "production": [
+                "H"
+            ],
+            "chain": "Z",
+            "decay": [
+                "gamgam"
+            ]
+        },
+        {
+            "production": [
+                "HpmW"
+            ],
+            "chain": "W",
+            "decay": [
+                "bb"
+            ]
+        }
+    ],
+    "properties": {
+        "production": {
+            "type": "array",
+            "description": "A list of production modes for the mother particle.",
+            "items": {
+                "$ref": "CommonDefs.schema.json#/productionMode"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+        },
+        "chain": {
+            "enum": [
+                "Z",
+                "W"
+            ],
+            "description": "The type of chain decay, either `Y -> X Z` or `Y -> X W+-` for arbitrary particles `X` and `Y` and the Z and W bosons."
+        },
+        "decay": {
+            "type": "array",
+            "description": "A list of decay modes for the daughter particle.",
+            "items": {
+                "$ref": "CommonDefs.schema.json#/decayMode"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+        }
+    },
+    "additionalProperties": false
+}

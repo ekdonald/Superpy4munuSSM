@@ -1,0 +1,265 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/PairDecayLimit.schema.json",
+    "type": "object",
+    "title": "Pair Decay Limit",
+    "description": "A 95% C.L. limit on the rate of a Higgs::predictions::PairDecayProcess that only depends on the masses of the involved BSM particles.\n The examples show: \n\n 1. A limit on `pp -> H2 -> H1 H1 -> bb tautau` where H1 has a mass of around 125GeV.\n 2. A search for `pp -> H2 -> H1 H1 -> mumu bb` where H2 has a mass of around 125GeV.\n\n The data-grids in the examples are restricted to the first and last mass points for brevity.",
+    "examples": [
+        {
+            "limitClass": "PairDecayLimit",
+            "id": 170702909,
+            "reference": "1707.02909",
+            "source": "Fig. 5 (upper)",
+            "citeKey": "Sirunyan:2017djm",
+            "collider": "LHC13",
+            "experiment": "CMS",
+            "luminosity": 35.9,
+            "process": {
+                "production": [
+                    "H"
+                ],
+                "firstDecay": [
+                    "bb"
+                ],
+                "secondDecay": [
+                    "tautau"
+                ]
+            },
+            "analysis": {
+                "equalDaughterMasses": true,
+                "massResolution": {
+                    "firstDaughter": {
+                        "absolute": 35,
+                        "relative": 0
+                    },
+                    "secondDaughter": {
+                        "absolute": 45,
+                        "relative": 0
+                    },
+                    "mother": {
+                        "absolute": 15,
+                        "relative": 0.15
+                    }
+                },
+                "grid": {
+                    "massMother": [
+                        250,
+                        900
+                    ],
+                    "massFirstDaughter": [
+                        125
+                    ]
+                },
+                "limit": {
+                    "observed": [
+                        0.228588643088,
+                        0.00521011241072
+                    ],
+                    "expected": [
+                        0.160645,
+                        0.006347660000000001
+                    ]
+                }
+            }
+        },
+        {
+            "limitClass": "PairDecayLimit",
+            "id": 181206359,
+            "reference": "1812.06359",
+            "source": "https://www.hepdata.net/record/ins1709317",
+            "citeKey": "Sirunyan:2018mot",
+            "collider": "LHC13",
+            "experiment": "CMS",
+            "luminosity": 35.9,
+            "process": {
+                "production": [
+                    "H",
+                    "vbfH"
+                ],
+                "firstDecay": [
+                    "mumu"
+                ],
+                "secondDecay": [
+                    "bb"
+                ]
+            },
+            "analysis": {
+                "equalDaughterMasses": true,
+                "massResolution": {
+                    "firstDaughter": {
+                        "absolute": 0.1,
+                        "relative": 0.03
+                    },
+                    "secondDaughter": {
+                        "absolute": 5,
+                        "relative": 0.1
+                    },
+                    "mother": {
+                        "absolute": 20,
+                        "relative": 0
+                    }
+                },
+                "grid": {
+                    "massMother": [
+                        125
+                    ],
+                    "massFirstDaughter": [
+                        20.0,
+                        62.5
+                    ]
+                },
+                "limit": {
+                    "observed": [
+                        0.0046852000000000005,
+                        0.0049696
+                    ],
+                    "expected": [
+                        0.0067746,
+                        0.0077424
+                    ]
+                }
+            }
+        }
+    ],
+    "required": [
+        "limitClass",
+        "id",
+        "reference",
+        "source",
+        "citeKey",
+        "collider",
+        "experiment",
+        "luminosity",
+        "process",
+        "analysis"
+    ],
+    "properties": {
+        "limitClass": {
+            "const": "PairDecayLimit"
+        },
+        "id": {
+            "$ref": "CommonDefs.schema.json#/id"
+        },
+        "reference": {
+            "$ref": "CommonDefs.schema.json#/reference"
+        },
+        "source": {
+            "$ref": "CommonDefs.schema.json#/source"
+        },
+        "citeKey": {
+            "$ref": "CommonDefs.schema.json#/citeKey"
+        },
+        "collider": {
+            "$ref": "CommonDefs.schema.json#/collider"
+        },
+        "experiment": {
+            "$ref": "CommonDefs.schema.json#/experiment"
+        },
+        "luminosity": {
+            "$ref": "CommonDefs.schema.json#/luminosity"
+        },
+        "process": {
+            "$ref": "PairDecayProcess.schema.json"
+        },
+        "constraints": {
+            "type": "object",
+            "description": "Assumptions made on the mother and/or daughter particles",
+            "properties": {
+                "mother": {
+                    "$ref": "Constraints.schema.json#/constraints"
+                },
+                "firstDaughter": {
+                    "$ref": "Constraints.schema.json#/constraints"
+                },
+                "secondDaughter": {
+                    "$ref": "Constraints.schema.json#/constraints"
+                }
+            }
+        },
+        "analysis": {
+            "type": "object",
+            "description": "The actual data of the limit and properties of the experimental analysis.",
+            "required": [
+                "grid",
+                "limit"
+            ],
+            "properties": {
+                "massResolution": {
+                    "type": "object",
+                    "description": "Mass resolution(s) for the mother and/or daughter particles.",
+                    "properties": {
+                        "mother": {
+                            "$ref": "CommonDefs.schema.json#/massResolution"
+                        },
+                        "firstDaughter": {
+                            "$ref": "CommonDefs.schema.json#/massResolution"
+                        },
+                        "secondDaughter": {
+                            "$ref": "CommonDefs.schema.json#/massResolution"
+                        }
+                    }
+                },
+                "equalDaughterMasses": {
+                    "type": "boolean",
+                    "description": "Is the limit given on a 2D (instead of 3D) grid where the daughter masses are assumed to be equal?",
+                    "default": false
+                },
+                "grid": {
+                    "type": "object",
+                    "description": "Defines the grid on which the limits are given. For a PairDecayLimit with distinct daughter masses this is the 3D regular grid spanned by `massMother`, `massFirstDaughter`, and `massSecondDaughter`. If `/analysis/equalDaughterMasses` is true `massSecondDaughter` is not required and the 2D regular grid spanned by `massMother` and `massFirstDaughter` is used.",
+                    "properties": {
+                        "massMother": {
+                            "$ref": "CommonDefs.schema.json#/massGrid"
+                        },
+                        "massFirstDaughter": {
+                            "$ref": "CommonDefs.schema.json#/massGrid"
+                        },
+                        "massSecondDaughter": {
+                            "$ref": "CommonDefs.schema.json#/massGrid"
+                        }
+                    },
+                    "required": [
+                        "massMother",
+                        "massFirstDaughter"
+                    ],
+                    "additionalProperties": false
+                },
+                "limit": {
+                    "type": "object",
+                    "description": "The actual data of the 95% C.L. limit **in `pb`**. The 1D `observed` and `expected` arrays are row-major-order flattened versions of the limits on the regular grid spanned by the masses. \nIf `/analysis/equalDaughterMasses` is false, this is `limits[massMother, massFirstDaughter, massSecondDaughter]` defined on the regular grid spanned by `/analysis/grid/massMother`, `/analysis/grid/massFirstDaughter`, and `/analysis/grid/massSecondDaughter`; \nif it is true this is `limits[massMother, massFirstDaughter, massFirstDaughter]` defined on the regular grid spanned by `/analysis/grid/massMother` and `/analysis/grid/massFirstDaughter`.",
+                    "properties": {
+                        "observed": {
+                            "$ref": "CommonDefs.schema.json#/observedLimit"
+                        },
+                        "expected": {
+                            "$ref": "CommonDefs.schema.json#/expectedLimit"
+                        }
+                    },
+                    "required": [
+                        "observed",
+                        "expected"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "if": {
+                "properties": {
+                    "equalDaughterMasses": {
+                        "const": false
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "grid": {
+                        "required": [
+                            "massSecondDaughter"
+                        ]
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

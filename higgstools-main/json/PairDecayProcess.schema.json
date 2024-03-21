@@ -1,0 +1,55 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/PairDecayProcess.schema.json",
+    "title": "PairDecayProcess",
+    "type": "object",
+    "description": "A process involving a decay of one BSM particle into another two other (potentially different) BSM particles. Corresponds to a Higgs::predictions::PairDecayProcess. The process is defined by a list of production modes `p` for the mother particle and lists of decay modes `d1` and `d2` for the daughter particles. The rate is obtained as the sum over all possible combinations of `p`, `d1`, and `d2`.\n The example shows the process `p p -> H -> h1 h2, h1 -> bb, h2 -> ZZ` for a mother particle `H` and daughter particles `h1` and `h2`",
+    "required": [
+        "production",
+        "firstDecay",
+        "secondDecay"
+    ],
+    "examples": [
+        {
+            "production": [
+                "H"
+            ],
+            "firstDecay": [
+                "bb"
+            ],
+            "secondDecay": [
+                "ZZ"
+            ]
+        }
+    ],
+    "properties": {
+        "production": {
+            "type": "array",
+            "description": "A list of production modes for the mother particle.",
+            "items": {
+                "$ref": "CommonDefs.schema.json#/productionMode"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+        },
+        "firstDecay": {
+            "type": "array",
+            "description": "A list of decay modes for the first daughter particle.",
+            "items": {
+                "$ref": "CommonDefs.schema.json#/decayMode"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+        },
+        "secondDecay": {
+            "type": "array",
+            "description": "A list of decay modes for the first daughter particle.",
+            "items": {
+                "$ref": "CommonDefs.schema.json#/decayMode"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+        }
+    },
+    "additionalProperties": false
+}

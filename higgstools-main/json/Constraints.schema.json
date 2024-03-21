@@ -1,0 +1,238 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/Constraints.schema.json",
+    "constraintsWSignal": {
+        "type": "array",
+        "description": "An array of constraints, the limit is only applied to a given particle/cluster if all of the constraints given here are fulfilled.",
+        "items": {
+            "anyOf": [
+                {
+                    "$ref": "#/ModelLikenessWSignal"
+                },
+                {
+                    "$ref": "#/TopDecayConsistency"
+                },
+                {
+                    "$ref": "#/CPValue"
+                },
+                {
+                    "$ref": "#/MumuTautauRatio"
+                },
+                {
+                    "$ref": "#/TopDominatedHgg"
+                }
+            ]
+        }
+    },
+    "constraints": {
+        "type": "array",
+        "description": "An array of constraints, the limit is only applied to a given particle/cluster if all of the constraints given here are fulfilled.",
+        "items": {
+            "anyOf": [
+                {
+                    "$ref": "#/ModelLikeness"
+                },
+                {
+                    "$ref": "#/TopDecayConsistency"
+                },
+                {
+                    "$ref": "#/CPValue"
+                },
+                {
+                    "$ref": "#/MumuTautauRatio"
+                },
+                {
+                    "$ref": "#/TopDominatedHgg"
+                }
+            ]
+        }
+    },
+    "normalizationWSignal": {
+        "type": "object",
+        "description": "Normalizes the rate of the signal process to the rate for the given process in the reference model.",
+        "examples": [
+            {
+                "reference": "SMHiggs",
+                "process": "signal"
+            }
+        ],
+        "required": [
+            "reference",
+            "process"
+        ],
+        "properties": {
+            "reference": {
+                "$ref": "CommonDefs.schema.json#/referenceModel"
+            },
+            "process": {
+                "description": "The reference ChannelProcess to use for the normalization.",
+                "anyOf": [
+                    {
+                        "$ref": "ChannelProcess.schema.json"
+                    },
+                    {
+                        "title": "signal",
+                        "const": "signal",
+                        "description": "Use the signal process of the limit (i.e. `/process`)."
+                    }
+                ]
+            }
+        },
+        "additionalProperties": false
+    },
+    "normalization": {
+        "type": "object",
+        "description": "Normalizes the rate of the signal process to the rate for the given process in the reference model.",
+        "required": [
+            "reference",
+            "process"
+        ],
+        "properties": {
+            "reference": {
+                "$ref": "CommonDefs.schema.json#/referenceModel"
+            },
+            "process": {
+                "description": "The reference ChannelProcess to use for the normalization.",
+                "$ref": "ChannelProcess.schema.json"
+            }
+        },
+        "additionalProperties": false
+    },
+    "ModelLikeness": {
+        "type": "object",
+        "description": "A model-likeness test ensures that the relative contributions of all channels in the given process are similar to those in the reference model.",
+        "required": [
+            "modelLike",
+            "process"
+        ],
+        "properties": {
+            "modelLike": {
+                "$ref": "CommonDefs.schema.json#/referenceModel"
+            },
+            "process": {
+                "description": "The ChannelProcess to use for the model-likeness test.",
+                "$ref": "ChannelProcess.schema.json"
+            }
+        },
+        "additionalProperties": false
+    },
+    "ModelLikenessWSignal": {
+        "type": "object",
+        "title": "ModelLikeness",
+        "description": "A model-likeness test ensures that the relative contributions of all channels in the given process are similar to those in the reference model.",
+        "examples": [
+            {
+                "modelLike": "signal",
+                "reference": "SMHiggs"
+            }
+        ],
+        "required": [
+            "modelLike",
+            "process"
+        ],
+        "properties": {
+            "modelLike": {
+                "$ref": "CommonDefs.schema.json#/referenceModel"
+            },
+            "process": {
+                "description": "The ChannelProcess to use for the model-likeness test.",
+                "anyOf": [
+                    {
+                        "$ref": "ChannelProcess.schema.json"
+                    },
+                    {
+                        "title": "signal",
+                        "const": "signal",
+                        "description": "Use the signal process of the limit (i.e. `/process`)."
+                    }
+                ]
+            }
+        },
+        "additionalProperties": false
+    },
+    "TopDecayConsistency": {
+        "type": "object",
+        "description": "This constraint ensures that `BR(t -> W+ b) + BR(t -> BSM)~1`. This is a requirement made in most searches for Higgs bosons in top decays.",
+        "examples": [
+            {
+                "topDecayConsistency": true
+            }
+        ],
+        "required": [
+            "topDecayConsistency"
+        ],
+        "properties": {
+            "topDecayConsistency": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "description": "A top decay production mode, e.g. brtHpb or brtHq"
+                },
+                "description": "The BSM decay modes of the top-quark to consider."
+            }
+        },
+        "additionalProperties": false
+    },
+    "CPValue": {
+        "type": "object",
+        "description": "This constraint ensures that the analysis is only applied to particles of the specified CP.",
+        "required": [
+            "CPValue"
+        ],
+        "examples": [
+            {
+                "CPValue": "even"
+            }
+        ],
+        "properties": {
+            "CPValue": {
+                "enum": [
+                    "odd",
+                    "even"
+                ],
+                "description": "the required CP value"
+            }
+        },
+        "additionalProperties": false
+    },
+    "MumuTautauRatio": {
+        "type": "object",
+        "description": "This constraint ensures that the analysis is only applied if the ratio between the decay widths of the considered particle or cluster into muon and tau pairs matches the ratio of the squared muon and tau masses.",
+        "examples": [
+            {
+                "mumuTautauRatio": "even"
+            }
+        ],
+        "required": [
+            "mumuTautauRatio"
+        ],
+        "properties": {
+            "mumuTautauRatio": {
+                "enum": [
+                    "odd",
+                    "even"
+                ],
+                "description": "The assumed CP-nature for the BR-ratio."
+            }
+        },
+        "additionalProperties": false
+    },
+    "TopDominatedHgg": {
+        "type": "object",
+        "description": "This constraint ensures that the analysis is only applied to particles for which the effective Higgs-gluon coupling is dominated by top-quark loops.",
+        "examples": [
+            {
+                "topDominatedHgg": true
+            }
+        ],
+        "required": [
+            "topDominatedHgg"
+        ],
+        "properties": {
+            "topDominatedHgg": {
+                "description": "The presence of this key identifies the type of constraint, the value is ignored."
+            }
+        },
+        "additionalProperties": false
+    }
+}

@@ -1,0 +1,76 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/higgsbounds/higgstools/-/raw/develop/json/Acceptances.schema.json",
+    "title": "Acceptances",
+    "type": "array",
+    "description": "An acceptance function for each channel of the ChannelProcess that multiplies the predicted rate. The size of this array has to match the size of the `/process/channels` array where each acceptance corresponds to one channel, in order.\n If your process has only one channel, it is usually better to simply rescale the observed and expected limits. You should *only* need this if the limit has *different* acceptances in *multiple* channels of the process.",
+    "items": {
+        "anyOf": [
+            {
+                "$ref": "#/$defs/constantAcceptance"
+            },
+            {
+                "$ref": "#/$defs/massDepAcceptance"
+            }
+        ]
+    },
+    "$defs": {
+        "constantAcceptance": {
+            "type": "object",
+            "description": "A constant acceptance that doesn't depend on any particle properties.",
+            "title": "ConstantAcceptance",
+            "examples": [
+                {
+                    "constantAcceptance": 0.8
+                }
+            ],
+            "required": [
+                "constantAcceptance"
+            ],
+            "properties": {
+                "constantAcceptance": {
+                    "type": "number",
+                    "description": "The acceptance value."
+                }
+            },
+            "additionalProperties": false
+        },
+        "massDepAcceptance": {
+            "type": "object",
+            "title": "MassDepAcceptance",
+            "description": "An acceptance that is a function of the particle mass.",
+            "examples": [
+                {
+                    "massDepAcceptance": [
+                        1.0,
+                        0.8,
+                        0.5
+                    ],
+                    "massGrid": [
+                        100,
+                        200,
+                        500
+                    ]
+                }
+            ],
+            "required": [
+                "massDepAcceptance",
+                "massGrid"
+            ],
+            "properties": {
+                "massDepAcceptance": {
+                    "description": "The acceptance values on the massGrid. Array length has to match the length of the massGrid.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "minItems": 1
+                },
+                "massGrid": {
+                    "$ref": "CommonDefs.schema.json#/massGrid"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
