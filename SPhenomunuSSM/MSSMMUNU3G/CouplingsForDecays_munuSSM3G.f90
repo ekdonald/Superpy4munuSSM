@@ -126,8 +126,8 @@ If ((m_in.le.Qin).and.(RunningCouplingsDecays)) Then
   If (m_in.le.mz) tz=Log(mz/Qin)  
   dt=tz/50._dp 
   Call odeint(g1D,394,0._dp,tz,deltaM,dt,0._dp,rge394,kont)
-
 End if 
+
 Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,              & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR)
 
@@ -136,6 +136,7 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
  ! --- Remove GUT-normalization of gauge couplings --- 
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
+
  
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
@@ -364,6 +365,7 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
  
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -602,6 +604,15 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
  
+If (m_in.le.Qin) Then 
+  If (m_in.le.mz) Then 
+    Call RunSM(mz,deltaM,vu/vd,g1,g2,g3,Yu,Yd,Ye,vd,vu) 
+  Else 
+    Call RunSM(m_in,deltaM,vu/vd,g1,g2,g3,Yu,Yd,Ye,vd,vu) 
+  End if 
+End if 
+
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -743,6 +754,9 @@ Call CouplingChiChihhT(gt1,gt2,gt3,g1,g2,lam,Yv,kap,ZH,UV,cplChiChihhL(gt1,gt2,g
 End Do 
 
 
+
+!Write (*,*) 'Start CouplingsFor_hh_decays_2B'
+
 cplcFdFdhhL = 0._dp 
 cplcFdFdhhR = 0._dp 
 Do gt1 = 1, 3
@@ -754,6 +768,8 @@ Call CouplingcFdFdhhT(gt1,gt2,gt3,Yd,ZH,ZDL,ZDR,cplcFdFdhhL(gt1,gt2,gt3)        
   End Do 
  End Do 
 End Do 
+
+!Write (*,*) 'End CouplingsFor_hh_decays_2B'
 
 
 cplcFuFuhhL = 0._dp 
@@ -1134,6 +1150,16 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
  
+ 
+If (m_in.le.Qin) Then 
+  If (m_in.le.mz) Then 
+    Call RunSM(mz,deltaM,vu/vd,g1,g2,g3,Yu,Yd,Ye,vd,vu) 
+  Else 
+    Call RunSM(m_in,deltaM,vu/vd,g1,g2,g3,Yu,Yd,Ye,vd,vu) 
+  End if 
+End if 
+
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -1615,6 +1641,16 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
  
+ 
+If (m_in.le.Qin) Then 
+  If (m_in.le.mz) Then 
+    Call RunSM(mz,deltaM,vu/vd,g1,g2,g3,Yu,Yd,Ye,vd,vu) 
+  Else 
+    Call RunSM(m_in,deltaM,vu/vd,g1,g2,g3,Yu,Yd,Ye,vd,vu) 
+  End if 
+End if 
+
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -1846,7 +1882,8 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
  ! --- Remove GUT-normalization of gauge couplings --- 
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
- 
+
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -2007,7 +2044,17 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
  ! --- Remove GUT-normalization of gauge couplings --- 
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
+
  
+If (m_in.le.Qin) Then 
+  If (m_in.le.mz) Then 
+    Call RunSM(mz,deltaM,vu/vd,g1,g2,g3,Yu,Yd,Ye,vd,vu) 
+  Else 
+    Call RunSM(m_in,deltaM,vu/vd,g1,g2,g3,Yu,Yd,Ye,vd,vu) 
+  End if 
+End if 
+
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -2243,7 +2290,8 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
  ! --- Remove GUT-normalization of gauge couplings --- 
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
- 
+
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -2471,7 +2519,8 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
  ! --- Remove GUT-normalization of gauge couplings --- 
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
- 
+
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -2700,7 +2749,8 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
  ! --- Remove GUT-normalization of gauge couplings --- 
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
- 
+
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -2980,6 +3030,8 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
  
+
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -3555,7 +3607,8 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
  ! --- Remove GUT-normalization of gauge couplings --- 
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
- 
+
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -4126,7 +4179,8 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
  ! --- Remove GUT-normalization of gauge couplings --- 
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
- 
+
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -4598,7 +4652,8 @@ Call GToParameters394(g1D,g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,        
  ! --- Remove GUT-normalization of gauge couplings --- 
 g1 = Sqrt(3._dp/5._dp)*g1 
 ! ----------------------- 
- 
+
+
 Call SolveTadpoleEquations(g1,g2,g3,Yd,Ye,lam,Yv,Yu,kap,Td,Te,Tlam,Tv,Tu,             & 
 & Tk,mq2,ml2,mHd2,mHu2,md2,mu2,me2,mv2,mlHd2,M1,M2,M3,vd,vu,vL,vR,(/ ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC, ZeroC /))
 
@@ -4971,17 +5026,20 @@ Else
 End if 
 End Function
 
+
 Subroutine RunSM(scale_out,deltaM,tb,g1,g2,g3,Yu, Yd, Ye, vd, vu) 
 Implicit None
 Real(dp), Intent(in) :: scale_out,deltaM, tb
 Real(dp), Intent(out) :: g1, g2, g3, vd, vu
 Complex(dp), Intent(out) :: Yu(3,3), Yd(3,3), Ye(3,3)
-Real(dp) :: dt, gSM(14), gSM2(2), gSM3(3), mtopMS,  sinw2, vev, tz, alphaStop 
+Real(dp) :: dt, gSM(14), gSM2(2), gSM3(3), mtopMS,  sinw2, vev, tz, alphaStop,scale_hsm
 Integer :: kont
 
 Yd = 0._dp
 Ye = 0._dp
 Yu = 0._dp
+
+! Write (*,*) '1. RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM(2) = ', RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM(2)
 
 If (.not.RunningTopMZ) Then
 
@@ -4999,6 +5057,7 @@ Call odeint(gSM2,2,tz,0._dp,deltaM,dt,0._dp,RGEAlphaS,kont)
 alphaStop = gSM2(2)**2/4._dp/Pi
 
 
+! Write (*,*) '2. RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM2(2) = ', RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM2(2)
 
 ! m_top^pole to m_top^MS(m_top) 
 
@@ -5023,6 +5082,9 @@ RunningTopMZ = .True.
 
 End if
 
+
+! Write (*,*) '3. RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM3(2), alphaStop = ', RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM3(2), alphaStop
+
 ! Starting values at MZ
 
 gSM(1)=sqrt(Alpha_mZ*4*Pi) 
@@ -5044,10 +5106,12 @@ gSM(12) = 5._dp/3._dp*Alpha_MZ/(1-sinW2)
 gSM(13) = Alpha_MZ/Sinw2
 gSM(14) = AlphaS_mZ
 
+
   nUp =2._dp 
   nDown =3._dp 
   nLep =3._dp 
  
+
 
 If (scale_out.gt.sqrt(mz2)) Then
 
@@ -5062,6 +5126,7 @@ If (scale_out.gt.sqrt(mz2)) Then
 
   Call odeint(gSM,14,tz,0._dp,deltaM,dt,0._dp,rge11,kont)
 
+! Write (*,*) '3.1. RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM(2) = ', RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM(2)
 
  ! From M_top to M_SUSY if M_top < M_SUSY 
  If (scale_out.gt.mf_u(3)) Then 
@@ -5070,6 +5135,9 @@ If (scale_out.gt.sqrt(mz2)) Then
   nUp =3._dp 
   Call odeint(gSM,14,tz,0._dp,deltaM,dt,0._dp,rge11,kont)
  End if 
+
+! Write (*,*) '3.2. RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM(2) = ', RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM(2)
+
 Else
 
  ! From M_Z down to scale_out
@@ -5079,6 +5147,8 @@ Else
 
 End if
 
+
+! Write (*,*) '4. RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM(2) = ', RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM(2)
 ! Calculating Couplings 
 
  sinW2=1._dp-mW2/mZ2 
@@ -5086,10 +5156,10 @@ End if
  vd=vev/Sqrt(1._dp+tb**2)
  vu=tb*vd
  
-Yd(1,1) =gSM(9)*sqrt(2._dp)/vd 
-Yd(2,2) =gSM(10)*sqrt(2._dp)/vd 
-Yd(3,3) =gSM(11)*sqrt(2._dp)/vd 
-Ye(1,1) =gSM(3)*sqrt(2._dp)/vd 
+Yd(1,1)=gSM(9)*sqrt(2._dp)/vd
+Yd(2,2)=gSM(10)*sqrt(2._dp)/vd 
+Yd(3,3)=gSM(11)*sqrt(2._dp)/vd 
+Ye(1,1)=gSM(3)*sqrt(2._dp)/vd 
 Ye(2,2)=gSM(4)*sqrt(2._dp)/vd 
 Ye(3,3)=gSM(5)*sqrt(2._dp)/vd 
 Yu(1,1)=gSM(6)*sqrt(2._dp)/vu 
@@ -5097,8 +5167,14 @@ Yu(2,2)=gSM(7)*sqrt(2._dp)/vu
 Yu(3,3)=gSM(8)*sqrt(2._dp)/vu 
 
 
-g3 =gSM(2) 
-g3running=gSM(2) 
+g3 = gSM(2)  
+g3running = gSM(2) 
+
+
+Write (*,*) 'RunSM ... md3, yb, Yd(3,3), vd = ', gSM(11), real(gSM(11)*sqrt(2._dp)/vd), real(Yd(3,3)), vd
+Write (*,*) 'RunSM ... mu3, yt, Yu(3,3), vu = ', gSM(8), real(gSM(8)*sqrt(2._dp)/vu),  real(Yu(3,3)), vu
+Write (*,*) 'RunSM ... gSM(11), g3running, g3, scale_out = ', gSM(11), g3running, g3, scale_out
+!Write (*,*) 'RunSM ... gSM(11), g3running, g3 = ', gSM(11), g3running, g3
 
 g1 = sqrt(gSM(12)*4._dp*Pi*3._dp/5._dp)
 g2 = sqrt(gSM(13)*4._dp*Pi)
@@ -5118,7 +5194,14 @@ End if
 End If
 
 
+!Write (*,*) '5. RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM(2) = ', RunningTopMZ, Alpha_mZ, AlphaS_mZ, gSM(2)
+
 End Subroutine RunSM
+
+
+
+
+
 
 
 Subroutine RunSMohdm(scale_out,deltaM,g1,g2,g3,Yu, Yd, Ye, v) 
@@ -5247,7 +5330,9 @@ Yu(3,3)=gSM(8)*sqrt(2._dp)/v
 
 
 g3 =gSM(2) 
-g3running=gSM(2) 
+g3running= gSM(2) 
+
+Write (*,*) 'RunSMohdm ... g3running, g3 = ', g3running, g3
 
 g1 = sqrt(gSM(12)*4._dp*Pi*3._dp/5._dp)
 g2 = sqrt(gSM(13)*4._dp*Pi)
