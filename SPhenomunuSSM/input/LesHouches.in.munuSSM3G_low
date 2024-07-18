@@ -8,7 +8,7 @@ Block SMINPUTS    # Standard Model inputs
 3 1.187000E-01    # alpha_s(MZ) SM MSbar 
 4 9.118870E+01    # Z-boson pole mass 
 5 4.200000E+00    # m_b(mb) SM MSbar 
-6 1.726000E+02    # m_top(pole) 
+6 1.735000E+02    # m_top(pole) 
 7 1.776690E+00    # m_tau(pole) 
 Block MINPAR     # Input parameters 
 3   3.400000E+01    # TanBeta
